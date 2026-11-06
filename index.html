@@ -3,294 +3,144 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AbacusArena | Aptitude Trainer Pro</title>
+<title>AbacusArena · Aptitude Trainer Pro</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --accent: #7c3aed;
-    --accent-hover: #6d28d9;
-    --accent-soft: rgba(124, 58, 237, 0.12);
+    --accent: #7c3aed; --accent-hover: #6d28d9; --accent-soft: rgba(124,58,237,0.12);
     --accent-rgb: 124, 58, 237;
-
-    --bg: #f5f3ff;
-    --sidebar-bg: #ede9fe;
-    --sidebar-hover: #ddd6fe;
-    --sidebar-active: #c4b5fd;
-    --chat-bg: #faf8ff;
-    --bubble-user: #7c3aed;
-    --bubble-bot: #ede9fe;
-    --text: #2e1065;
-    --text-soft: #4c1d95;
-    --muted: #7e6ba8;
-    --border: #ddd6fe;
-    --input-bg: #ffffff;
-    --topbar-bg: #f5f3ff;
-    --shadow: 0 8px 32px rgba(124, 58, 237, 0.12);
+    --bg: #f5f3ff; --sidebar-bg: #ede9fe; --sidebar-hover: #ddd6fe; --sidebar-active: #c4b5fd;
+    --chat-bg: #faf8ff; --bubble-user: #7c3aed; --bubble-bot: #ede9fe;
+    --text: #2e1065; --text-soft: #4c1d95; --muted: #7e6ba8; --border: #ddd6fe;
+    --input-bg: #ffffff; --topbar-bg: #f5f3ff;
+    --shadow: 0 8px 32px rgba(124,58,237,0.12);
+    --success: #22c55e; --danger: #ef4444; --warning: #eab308;
   }
-
-  html.accent-red {
-    --accent: #ef4444 !important; --accent-hover: #dc2626 !important;
-    --accent-soft: rgba(239,68,68,0.14) !important;
-    --accent-rgb: 239, 68, 68 !important;
-    --sidebar-active: #fca5a5 !important;
-    --bubble-user: #ef4444 !important;
-    --shadow: 0 8px 32px rgba(239,68,68,0.14) !important;
-  }
-  html.accent-green {
-    --accent: #22c55e !important; --accent-hover: #16a34a !important;
-    --accent-soft: rgba(34,197,94,0.14) !important;
-    --accent-rgb: 34, 197, 94 !important;
-    --sidebar-active: #86efac !important;
-    --bubble-user: #22c55e !important;
-    --shadow: 0 8px 32px rgba(34,197,94,0.14) !important;
-  }
-  html.accent-yellow {
-    --accent: #eab308 !important; --accent-hover: #ca8a04 !important;
-    --accent-soft: rgba(234,179,8,0.16) !important;
-    --accent-rgb: 234, 179, 8 !important;
-    --sidebar-active: #fde047 !important;
-    --bubble-user: #eab308 !important;
-    --shadow: 0 8px 32px rgba(234,179,8,0.16) !important;
-  }
-  html.accent-violet {
-    --accent: #7c3aed !important; --accent-hover: #6d28d9 !important;
-    --accent-soft: rgba(124,58,237,0.12) !important;
-    --accent-rgb: 124, 58, 237 !important;
-    --sidebar-active: #c4b5fd !important;
-    --bubble-user: #7c3aed !important;
-    --shadow: 0 8px 32px rgba(124,58,237,0.12) !important;
-  }
-
+  html.accent-red { --accent:#ef4444!important; --accent-hover:#dc2626!important; --accent-soft:rgba(239,68,68,0.14)!important; --accent-rgb:239,68,68!important; --sidebar-active:#fca5a5!important; --bubble-user:#ef4444!important; --shadow:0 8px 32px rgba(239,68,68,0.14)!important; }
+  html.accent-green { --accent:#22c55e!important; --accent-hover:#16a34a!important; --accent-soft:rgba(34,197,94,0.14)!important; --accent-rgb:34,197,94!important; --sidebar-active:#86efac!important; --bubble-user:#22c55e!important; --shadow:0 8px 32px rgba(34,197,94,0.14)!important; }
+  html.accent-yellow { --accent:#eab308!important; --accent-hover:#ca8a04!important; --accent-soft:rgba(234,179,8,0.16)!important; --accent-rgb:234,179,8!important; --sidebar-active:#fde047!important; --bubble-user:#eab308!important; --shadow:0 8px 32px rgba(234,179,8,0.16)!important; }
+  html.accent-violet { --accent:#7c3aed!important; --accent-hover:#6d28d9!important; --accent-soft:rgba(124,58,237,0.12)!important; --accent-rgb:124,58,237!important; --sidebar-active:#c4b5fd!important; --bubble-user:#7c3aed!important; --shadow:0 8px 32px rgba(124,58,237,0.12)!important; }
   html.dark {
-    --bg: #0f1117;
-    --sidebar-bg: #171923;
-    --sidebar-hover: #232634;
-    --sidebar-active: #2d3142;
-    --chat-bg: #0f1117;
-    --bubble-bot: #1e2130;
-    --text: #e5e7eb;
-    --text-soft: #c4b5fd;
-    --muted: #8b8fa3;
-    --border: #2d3142;
-    --input-bg: #1e2130;
-    --topbar-bg: #12141c;
+    --bg:#0f1117; --sidebar-bg:#171923; --sidebar-hover:#232634; --sidebar-active:#2d3142;
+    --chat-bg:#0f1117; --bubble-bot:#1e2130; --text:#e5e7eb; --text-soft:#c4b5fd;
+    --muted:#8b8fa3; --border:#2d3142; --input-bg:#1e2130; --topbar-bg:#12141c;
+    --success:#4ade80; --danger:#f87171; --warning:#facc15;
   }
-
   html, body { height: 100%; }
-  body {
-    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    overflow: hidden;
-    transition: background 0.4s ease, color 0.4s ease;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); overflow: hidden; transition: background 0.4s ease, color 0.4s ease; background-size: cover; background-position: center; background-repeat: no-repeat; }
   .app { display: flex; height: 100vh; width: 100vw; }
 
-  /* ONBOARDING */
-  .onboarding-overlay {
-    position: fixed; inset: 0; background: var(--bg); z-index: 200;
-    display: flex; align-items: center; justify-content: center; padding: 20px;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-  }
+  .onboarding-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; transition: opacity 0.5s ease, transform 0.5s ease; }
   .onboarding-overlay.fade-out { opacity: 0; transform: scale(1.08); pointer-events: none; }
-  .onboarding-card {
-    background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 20px;
-    padding: 36px; width: 100%; max-width: 480px; box-shadow: var(--shadow); text-align: center;
-  }
-  .onboarding-card h1 {
-    font-size: 26px; margin-bottom: 8px; color: var(--accent);
-  }
+  .onboarding-card { background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 20px; padding: 36px; width: 100%; max-width: 480px; box-shadow: var(--shadow); text-align: center; }
+  .onboarding-card h1 { font-size: 26px; margin-bottom: 8px; color: var(--accent); }
   .onboarding-card p { color: var(--muted); font-size: 14px; margin-bottom: 20px; line-height: 1.5; }
-  .onboarding-input {
-    width: 100%; padding: 12px 16px; background: var(--input-bg); border: 1px solid var(--border);
-    border-radius: 10px; color: var(--text); font-size: 15px; outline: none; margin-bottom: 16px;
-  }
+  .onboarding-input { width: 100%; padding: 12px 16px; background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px; color: var(--text); font-size: 15px; outline: none; margin-bottom: 16px; }
   .onboarding-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-
   .bg-picker-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-  .bg-pick-btn {
-    padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--input-bg);
-    color: var(--text-soft); font-weight: 600; cursor: pointer; font-size: 13px; transition: all 0.2s;
-  }
+  .bg-pick-btn { padding: 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--input-bg); color: var(--text-soft); font-weight: 600; cursor: pointer; font-size: 13px; transition: all 0.2s; }
   .bg-pick-btn:hover, .bg-pick-btn.active { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
-
-  .onboarding-btn {
-    width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none;
-    border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.3s;
-  }
+  .onboarding-btn { width: 100%; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.3s; }
   .onboarding-btn:hover { background: var(--accent-hover); }
 
-  /* GREETING OVERLAY */
-  .greet-overlay {
-    position: fixed; inset: 0; background: var(--bg); z-index: 150;
-    display: flex; align-items: center; justify-content: center; padding: 20px;
-    opacity: 0; pointer-events: none; transition: opacity 0.6s cubic-bezier(.4,0,.2,1);
-  }
+  .greet-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 150; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.6s cubic-bezier(.4,0,.2,1); }
   .greet-overlay.active { opacity: 1; pointer-events: auto; }
-  .greet-message {
-    font-size: 42px; font-weight: 800; color: var(--accent);
-    animation: greetBounce 1.6s cubic-bezier(.34,1.56,.64,1) infinite; text-align: center;
-  }
-  @keyframes greetBounce {
-    0%, 100% { transform: scale(0.92) translateY(10px); opacity: 0.7; }
-    50%      { transform: scale(1.05) translateY(0); opacity: 1; }
-  }
+  .greet-message { font-size: 42px; font-weight: 800; color: var(--accent); animation: greetBounce 1.6s cubic-bezier(.34,1.56,.64,1) infinite; text-align: center; }
+  @keyframes greetBounce { 0%,100% { transform: scale(0.92) translateY(10px); opacity: 0.7; } 50% { transform: scale(1.05) translateY(0); opacity: 1; } }
 
-  /* SIDEBAR */
-  .sidebar {
-    width: 300px; background: var(--sidebar-bg); display: flex; flex-direction: column;
-    border-right: 1px solid var(--border); flex-shrink: 0; transition: margin-left 0.35s ease;
-  }
+  .sidebar { width: 300px; background: var(--sidebar-bg); display: flex; flex-direction: column; border-right: 1px solid var(--border); flex-shrink: 0; transition: margin-left 0.35s ease; overflow: hidden; }
   .sidebar.collapsed { margin-left: -300px; }
   .sidebar-header { padding: 16px; border-bottom: 1px solid var(--border); }
   .brand { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
   .brand-name { font-weight: 800; font-size: 17px; color: var(--accent); }
-  .settings-btn {
-    background: transparent; border: none; color: var(--muted); font-size: 20px; cursor: pointer;
-    padding: 6px 10px; border-radius: 8px; transition: transform 0.5s;
-  }
+  .settings-btn { background: transparent; border: none; color: var(--muted); font-size: 20px; cursor: pointer; padding: 6px 10px; border-radius: 8px; transition: transform 0.5s; }
   .settings-btn:hover { background: var(--sidebar-hover); color: var(--accent); transform: rotate(180deg); }
-  
-  /* TOUCHABLE DIRECTORY BUTTON STYLE */
-  .sidebar-action-btn {
-    width: 100%; padding: 11px; background: var(--accent); color: #fff; border: none;
-    border-radius: 8px; font-size: 13.5px; font-weight: 700; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 6px;
-    transition: all 0.2s cubic-bezier(.34,1.56,.64,1);
-    box-shadow: 0 4px 12px var(--accent-soft);
-  }
+  .sidebar-action-btn { width: 100%; padding: 11px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 13.5px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s cubic-bezier(.34,1.56,.64,1); box-shadow: 0 4px 12px var(--accent-soft); }
   .sidebar-action-btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 16px var(--accent-soft); }
   .sidebar-action-btn:active { transform: scale(0.96); }
-
   .history-label { padding: 14px 16px 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); font-weight: 600; }
   .history-list { flex: 1; overflow-y: auto; padding: 0 8px 16px; }
-  .history-item {
-    display: flex; align-items: center; padding: 10px 12px; border-radius: 8px; cursor: pointer;
-    font-size: 13.5px; color: var(--text-soft); margin-bottom: 2px; transition: all 0.2s;
-  }
+  .history-item { display: flex; align-items: center; padding: 10px 12px; border-radius: 8px; cursor: pointer; font-size: 13.5px; color: var(--text-soft); margin-bottom: 2px; transition: all 0.2s; }
   .history-item:hover { background: var(--sidebar-hover); transform: translateX(4px); }
   .history-item.active { background: var(--sidebar-active); color: var(--text); font-weight: 700; }
   .history-item .title { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 6px; }
-  .history-item .del-hist-btn {
-    background: transparent; border: none; color: var(--muted); cursor: pointer; font-size: 13px; padding: 2px 6px; border-radius: 4px;
-    transition: background 0.2s, color 0.2s;
-  }
+  .history-item .del-hist-btn { background: transparent; border: none; color: var(--muted); cursor: pointer; font-size: 13px; padding: 2px 6px; border-radius: 4px; transition: background 0.2s, color 0.2s; }
   .history-item .del-hist-btn:hover { background: #fee2e2; color: #ef4444; }
   .empty-history { padding: 20px 12px; color: var(--muted); font-size: 13px; text-align: center; font-style: italic; }
-
-  .sidebar-footer {
-    padding: 12px 16px; border-top: 1px solid var(--border); font-size: 11.5px;
-    color: var(--muted); display: flex; justify-content: space-between; align-items: center;
-  }
+  .sidebar-footer { padding: 12px 16px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--muted); display: flex; flex-direction: column; gap: 6px; }
+  .sidebar-footer > div:first-child { display: flex; justify-content: space-between; align-items: center; width: 100%; }
   .clear-all { background: transparent; border: none; color: var(--muted); font-size: 11.5px; cursor: pointer; text-decoration: underline; }
   .clear-all:hover { color: #ef4444; }
 
-  /* MAIN */
   .main { flex: 1; display: flex; flex-direction: column; min-width: 0; background: var(--chat-bg); }
   .topbar { padding: 10px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; background: var(--topbar-bg); }
   .menu-toggle { background: transparent; border: none; color: var(--text); font-size: 20px; cursor: pointer; padding: 6px 10px; border-radius: 8px; }
   .menu-toggle:hover { background: var(--sidebar-hover); }
   .topbar-spacer { flex: 1; }
   .status-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); }
-
   .content-area { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
   .messages { flex: 1; overflow-y: auto; padding: 28px 20px 20px; display: flex; flex-direction: column; gap: 18px; scroll-behavior: smooth; }
   .msg-row { display: flex; max-width: 820px; width: 100%; margin: 0 auto; animation: msgPop 0.35s ease both; }
   @keyframes msgPop { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   .msg-row.user { justify-content: flex-end; }
-
   .bubble { padding: 12px 16px; border-radius: 14px; font-size: 14.5px; line-height: 1.65; max-width: 86%; word-wrap: break-word; white-space: pre-wrap; }
   .msg-row.bot .bubble { background: var(--bubble-bot); color: var(--text); border-bottom-left-radius: 4px; }
   .msg-row.user .bubble { background: var(--bubble-user); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 4px 14px rgba(var(--accent-rgb), 0.25); }
 
-  /* TOPICS DIRECTORY MODAL */
-  .directory-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 250;
-    display: none; align-items: center; justify-content: center; padding: 30px; animation: fadeIn 0.3s ease;
-  }
+  .profile-card { background: var(--input-bg); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin: 0 auto 20px; max-width: 820px; width: 100%; box-shadow: var(--shadow); animation: msgPop 0.4s ease both; }
+  .profile-card h3 { color: var(--accent); font-size: 18px; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .profile-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+  .stat-box { background: var(--sidebar-bg); border-radius: 12px; padding: 14px; text-align: center; }
+  .stat-box .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); font-weight: 600; margin-bottom: 4px; }
+  .stat-box .stat-value { font-size: 28px; font-weight: 800; color: var(--accent); }
+  .stat-box .stat-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .topic-stats-list { display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto; }
+  .topic-stat-row { display: flex; align-items: center; gap: 12px; padding: 8px 12px; background: var(--sidebar-bg); border-radius: 8px; font-size: 13px; }
+  .topic-stat-row .ts-name { flex: 1; font-weight: 600; color: var(--text-soft); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .topic-stat-row .ts-bar { width: 90px; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; flex-shrink: 0; }
+  .topic-stat-row .ts-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+  .topic-stat-row .ts-count { min-width: 84px; text-align: right; font-weight: 600; color: var(--muted); font-size: 12px; flex-shrink: 0; }
+  .profile-footer { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 8px; }
+  .profile-footer .reset-profile { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 6px 14px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; }
+  .profile-footer .reset-profile:hover { border-color: var(--danger); color: var(--danger); }
+  .profile-tip { font-size: 12px; color: var(--muted); font-style: italic; }
+
+  .directory-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 250; display: none; align-items: center; justify-content: center; padding: 30px; animation: fadeIn 0.3s ease; }
   .directory-overlay.open { display: flex; }
-  .directory-modal {
-    background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 20px;
-    width: 100%; max-width: 900px; height: 85vh; display: flex; flex-direction: column; box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-    animation: popIn 0.4s cubic-bezier(.34,1.56,.64,1); overflow: hidden;
-  }
-  .directory-modal-header {
-    padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;
-  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .directory-modal { background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 20px; width: 100%; max-width: 900px; height: 85vh; display: flex; flex-direction: column; box-shadow: 0 25px 60px rgba(0,0,0,0.3); animation: popIn 0.4s cubic-bezier(.34,1.56,.64,1); overflow: hidden; }
+  @keyframes popIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+  .directory-modal-header { padding: 20px 24px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
   .directory-modal-header h2 { font-size: 18px; color: var(--accent); }
   .directory-grid { flex: 1; overflow-y: auto; padding: 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-  .dir-card {
-    background: var(--input-bg); border: 1px solid var(--border); border-radius: 14px; padding: 18px;
-    box-shadow: var(--shadow); transition: transform 0.3s, border-color 0.3s; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between;
-  }
+  .dir-card { background: var(--input-bg); border: 1px solid var(--border); border-radius: 14px; padding: 18px; box-shadow: var(--shadow); transition: transform 0.3s, border-color 0.3s; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; }
   .dir-card:hover { transform: translateY(-4px); border-color: var(--accent); }
   .dir-card h3 { font-size: 15px; color: var(--accent); margin-bottom: 6px; }
   .dir-card p { font-size: 12.5px; color: var(--muted); margin-bottom: 12px; line-height: 1.4; }
-  .dir-card button {
-    padding: 7px 12px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; align-self: flex-start;
-  }
+  .dir-card button { padding: 7px 12px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; align-self: flex-start; }
 
-  /* DIAGRAM & FORMULA CARD */
-  .diagram-box {
-    background: var(--input-bg); border: 1px dashed var(--accent); padding: 12px 16px; border-radius: 8px; margin: 10px 0; text-align: center; font-family: monospace; font-size: 13.5px; color: var(--text-soft);
-  }
-  .formula-box {
-    background: var(--input-bg); border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 8px; margin: 10px 0;
-  }
+  .diagram-box { background: var(--input-bg); border: 1px dashed var(--accent); padding: 12px 16px; border-radius: 8px; margin: 10px 0; text-align: center; font-family: monospace; font-size: 13.5px; color: var(--text-soft); }
+  .formula-box { background: var(--input-bg); border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 8px; margin: 10px 0; }
   .formula-box h5 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 6px; }
   .formula-box p { font-size: 14px; margin-bottom: 4px; font-family: monospace; }
 
-  /* START GREEN BUTTON */
-  .start-gen-btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    background: #22c55e; color: #fff; border: none; padding: 12px 20px; border-radius: 10px;
-    font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s;
-  }
+  .start-gen-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--success); color: #fff; border: none; padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.2s; }
   .start-gen-btn:hover { background: #16a34a; transform: translateY(-2px); }
 
-  /* NEXT QUESTION PROMPT BUTTONS */
-  .next-prompt-box {
-    background: var(--input-bg); border: 1px solid var(--border); padding: 14px; border-radius: 10px; margin-top: 12px; text-align: center;
-  }
-  .next-prompt-box p { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
-  .next-prompt-btns { display: flex; justify-content: center; gap: 10px; }
-  .np-btn-yes { background: #22c55e; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; }
-  .np-btn-yes:hover { background: #16a34a; }
-  .np-btn-no { background: #ef4444; color: #fff; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; }
-  .np-btn-no:hover { background: #dc2626; }
-
-  .quiz-card {
-    background: var(--input-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-top: 10px; width: 100%;
-  }
+  .quiz-card { background: var(--input-bg); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-top: 10px; width: 100%; }
   .quiz-card h4 { color: var(--accent); font-size: 15px; margin-bottom: 8px; }
   .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
-  .quiz-option-btn {
-    padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--sidebar-bg);
-    color: var(--text); font-size: 13.5px; font-weight: 600; cursor: pointer; text-align: left; transition: all 0.2s;
-  }
+  .quiz-option-btn { padding: 10px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--sidebar-bg); color: var(--text); font-size: 13.5px; font-weight: 600; cursor: pointer; text-align: left; transition: all 0.2s; }
   .quiz-option-btn:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); transform: translateY(-2px); }
-  .quiz-option-btn.correct { background: #22c55e !important; color: #fff !important; border-color: #22c55e !important; }
-  .quiz-option-btn.wrong { background: #ef4444 !important; color: #fff !important; border-color: #ef4444 !important; }
+  .quiz-option-btn.correct { background: var(--success) !important; color: #fff !important; border-color: var(--success) !important; }
+  .quiz-option-btn.wrong { background: var(--danger) !important; color: #fff !important; border-color: var(--danger) !important; }
 
-  /* SMALL RED CHEATING NOTICE BOX */
-  .cheat-box {
-    background: #fee2e2; border: 1px solid #ef4444; color: #991b1b; padding: 10px 14px;
-    border-radius: 8px; font-size: 13px; margin: 10px 0; display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  }
-  .cheat-box button {
-    background: #ef4444; color: #fff; border: none; padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: 700;
-  }
+  .cheat-box { background: #fee2e2; border: 1px solid #ef4444; color: #991b1b; padding: 10px 14px; border-radius: 8px; font-size: 13px; margin: 10px 0; display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  html.dark .cheat-box { background: #2a1515; color: #fca5a5; }
+  .cheat-box button { background: #ef4444; color: #fff; border: none; padding: 4px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: 700; }
   .cheat-box button:hover { background: #dc2626; }
 
-  /* ANALYSIS TABLE PANEL BELOW */
-  .analysis-section {
-    background: var(--input-bg); border-top: 1px solid var(--border); padding: 12px 20px; max-height: 140px; overflow-y: auto; font-size: 12px;
-  }
+  .analysis-section { background: var(--input-bg); border-top: 1px solid var(--border); padding: 12px 20px; max-height: 140px; overflow-y: auto; font-size: 12px; }
   .analysis-section h4 { font-size: 12px; color: var(--accent); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
   .analysis-table { width: 100%; border-collapse: collapse; text-align: left; }
   .analysis-table th, .analysis-table td { padding: 4px 6px; border-bottom: 1px solid var(--border); color: var(--text); }
@@ -298,77 +148,60 @@
   .analysis-row { cursor: pointer; transition: background 0.2s; }
   .analysis-row:hover { background: var(--sidebar-hover); }
 
-  /* LOADING SPINNER ANIMATION */
-  .loading-card {
-    background: var(--input-bg); border: 1px solid var(--border); padding: 16px; border-radius: 12px; display: flex; align-items: center; gap: 14px; margin: 10px 0; width: fit-content;
-  }
-  .spinner {
-    width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
+  .loading-card { background: var(--input-bg); border: 1px solid var(--border); padding: 16px; border-radius: 12px; display: flex; align-items: center; gap: 14px; margin: 10px 0; width: fit-content; }
+  .spinner { width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* BOTTOM CONTROL BAR WITH FIXED NEXT BUTTON */
-  .bottom-control-bar {
-    padding: 16px 20px; background: var(--chat-bg); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
-  }
+  .bottom-control-bar { padding: 16px 20px; background: var(--chat-bg); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
   .code-boxes-wrapper { display: flex; gap: 8px; }
-  .code-box {
-    width: 44px; height: 50px; text-align: center; font-size: 22px; font-weight: 700;
-    background: var(--input-bg); border: 2px solid var(--border); border-radius: 10px; color: var(--text);
-    outline: none; transition: border-color 0.2s, box-shadow 0.2s;
-  }
+  .code-box { width: 44px; height: 50px; text-align: center; font-size: 22px; font-weight: 700; background: var(--input-bg); border: 2px solid var(--border); border-radius: 10px; color: var(--text); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
   .code-box:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-  .code-submit-btn {
-    padding: 12px 20px; background: var(--accent); color: #fff; border: none; border-radius: 10px;
-    font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s; height: 50px;
-  }
+  .code-submit-btn { padding: 12px 20px; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s; height: 50px; }
   .code-submit-btn:hover { background: var(--accent-hover); }
-
-  .next-global-btn {
-    padding: 12px 24px; background: #22c55e; color: #fff; border: none; border-radius: 10px;
-    font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.2s; height: 50px;
-    display: none; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(34,197,94,0.3);
-  }
+  .next-global-btn { padding: 12px 24px; background: var(--success); color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.2s, transform 0.2s; height: 50px; display: none; align-items: center; gap: 6px; box-shadow: 0 4px 14px rgba(34,197,94,0.3); }
   .next-global-btn:hover { background: #16a34a; transform: translateY(-2px); }
 
-  /* SETTINGS PANEL */
-  .settings-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.45); backdrop-filter: blur(6px);
-    display: none; align-items: center; justify-content: center; z-index: 100;
-  }
+  .settings-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.45); backdrop-filter: blur(6px); display: none; align-items: center; justify-content: center; z-index: 100; }
   .settings-overlay.open { display: flex; }
-  .settings-panel {
-    background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 16px;
-    width: 90%; max-width: 480px; padding: 24px; box-shadow: 0 24px 70px rgba(0,0,0,0.4); max-height: 88vh; overflow-y: auto;
-  }
+  .settings-panel { background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 16px; width: 90%; max-width: 480px; padding: 24px; box-shadow: 0 24px 70px rgba(0,0,0,0.4); max-height: 88vh; overflow-y: auto; }
   .settings-panel h2 { font-size: 18px; margin-bottom: 18px; color: var(--text); display: flex; justify-content: space-between; align-items: center; }
   .settings-close { background: transparent; border: none; color: var(--muted); font-size: 20px; cursor: pointer; padding: 4px 10px; border-radius: 8px; }
   .settings-close:hover { background: var(--sidebar-hover); color: var(--text); }
-
   .settings-section { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
   .settings-section:last-of-type { border-bottom: none; }
   .settings-section .section-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); font-weight: 700; margin-bottom: 12px; }
-
   .theme-toggle { display: flex; gap: 8px; }
-  .theme-btn {
-    flex: 1; padding: 10px; border-radius: 10px; border: 1px solid var(--border);
-    background: var(--input-bg); color: var(--text-soft); cursor: pointer; font-size: 13px; font-weight: 600;
-  }
+  .theme-btn { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--input-bg); color: var(--text-soft); cursor: pointer; font-size: 13px; font-weight: 600; }
   .theme-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
   .color-row { display: flex; gap: 10px; }
   .color-btn { flex: 1; height: 40px; border-radius: 10px; border: 2px solid transparent; cursor: pointer; color: #fff; font-weight: 700; }
   .color-btn.active { border-color: var(--text); }
-  .color-btn.red { background: #ef4444; }
-  .color-btn.green { background: #22c55e; }
-  .color-btn.yellow { background: #eab308; color: #422006; }
-  .color-btn.violet { background: #7c3aed; }
+  .color-btn.red { background: #ef4444; } .color-btn.green { background: #22c55e; } .color-btn.yellow { background: #eab308; color: #422006; } .color-btn.violet { background: #7c3aed; }
+
+  /* USERNAME LOCK UI */
+  .username-lock-box { background: var(--sidebar-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+  .username-lock-box .ul-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); font-weight: 700; margin-bottom: 6px; }
+  .username-lock-box .ul-name { font-size: 16px; font-weight: 800; color: var(--accent); margin-bottom: 4px; }
+  .username-lock-box .ul-status { font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .username-lock-box .ul-status.locked { color: var(--danger); font-weight: 600; }
+  .username-lock-box .ul-status.available { color: var(--success); font-weight: 600; }
+  .username-change-row { display: flex; gap: 8px; margin-top: 10px; }
+  .username-change-row input { flex: 1; padding: 9px 12px; background: var(--input-bg); border: 1px solid var(--border); border-radius: 8px; color: var(--text); font-size: 13px; outline: none; }
+  .username-change-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .username-change-row button { padding: 9px 14px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+  .username-change-row button:disabled { background: var(--border); color: var(--muted); cursor: not-allowed; }
+  .username-change-row button:not(:disabled):hover { background: var(--accent-hover); }
+
+  @media (max-width: 720px) {
+    .sidebar { position: fixed; z-index: 50; height: 100vh; }
+    .profile-stats-grid { grid-template-columns: 1fr; }
+    .quiz-options { grid-template-columns: 1fr; }
+    .topic-stat-row .ts-bar { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ONBOARDING -->
 <div class="onboarding-overlay" id="onboardingOverlay">
   <div class="onboarding-card">
     <h1>AbacusArena Aptitude Trainer</h1>
@@ -387,16 +220,12 @@
   </div>
 </div>
 
-<!-- GREETING OVERLAY -->
-<div class="greet-overlay" id="greetOverlay">
-  <div class="greet-message" id="greetMessageText">Hello, User</div>
-</div>
+<div class="greet-overlay" id="greetOverlay"><div class="greet-message" id="greetMessageText">Hello, User</div></div>
 
-<!-- TOPICS DIRECTORY MODAL -->
 <div class="directory-overlay" id="directoryOverlay">
   <div class="directory-modal">
     <div class="directory-modal-header">
-      <h2>📚 Training Topics Directory (00001 - 00030)</h2>
+      <h2>📚 Training Topics Directory (00001 - 00034)</h2>
       <button type="button" class="settings-close" id="directoryCloseBtn">✕</button>
     </div>
     <div class="directory-grid" id="directoryGrid"></div>
@@ -411,17 +240,16 @@
         <span class="brand-name">AbacusArena</span>
       </div>
       <button type="button" class="sidebar-action-btn" id="dirModalOpenBtn">📚 Topics Directory</button>
+      <button type="button" class="sidebar-action-btn" id="profileBtn" style="margin-top:8px; background:var(--success);">📊 My Profile</button>
     </div>
     <div class="history-label">Active History Sessions</div>
     <div class="history-list" id="historyList"></div>
-    <div class="sidebar-footer" style="flex-direction: column; gap: 6px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <div class="sidebar-footer">
+      <div>
         <span id="chatCount">Active</span>
         <button type="button" class="clear-all" id="clearAllBtn">Reset</button>
       </div>
-      <div style="text-align: center; font-size: 10px; color: var(--muted); border-top: 1px dashed var(--border); padding-top: 4px; width: 100%;">
-        By Aswin Krishnamoorthy
-      </div>
+      <div style="text-align: center; font-size: 10px; color: var(--muted); border-top: 1px dashed var(--border); padding-top: 4px; width: 100%;">By Aswin Krishnamoorthy</div>
     </div>
   </aside>
 
@@ -433,31 +261,21 @@
     </div>
 
     <div class="content-area">
-      <!-- TRAINING MESSAGES VIEW -->
+      <div id="profileView" style="display:none; padding: 28px 20px; overflow-y:auto; flex:1;"></div>
       <div class="messages" id="messages" style="display: flex;"></div>
-
-      <!-- ANALYSIS TABLE BELOW (HIDDEN WHEN NEXT QN GENERATED) -->
       <div class="analysis-section" id="analysisSection" style="display: none;">
         <h4>📊 Last Question Telemetry Analysis</h4>
         <table class="analysis-table" id="analysisTable">
-          <thead>
-            <tr>
-              <th>Topic Code</th>
-              <th>Status</th>
-              <th>Time Taken</th>
-              <th>Action</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Topic Code</th><th>Status</th><th>Time Taken</th><th>Action</th></tr></thead>
           <tbody id="analysisTableBody"></tbody>
         </table>
       </div>
     </div>
 
-    <!-- BOTTOM CONTROL BAR (CODE ENTRY + FIXED NEXT QUESTION BUTTON) -->
     <div class="bottom-control-bar" id="codeEntryBar">
       <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
         <span style="font-size:13px; font-weight:700; color:var(--muted); text-transform:uppercase;">Enter Code:</span>
-        <div class="code-boxes-wrapper" id="codeBoxesWrapper">
+        <div class="code-boxes-wrapper">
           <input type="text" maxlength="1" class="code-box" id="cb1" autocomplete="off">
           <input type="text" maxlength="1" class="code-box" id="cb2" autocomplete="off">
           <input type="text" maxlength="1" class="code-box" id="cb3" autocomplete="off">
@@ -471,10 +289,14 @@
   </main>
 </div>
 
-<!-- SETTINGS -->
 <div class="settings-overlay" id="settingsOverlay">
   <div class="settings-panel">
     <h2>Settings <button type="button" class="settings-close" id="settingsClose">✕</button></h2>
+
+    <div class="settings-section">
+      <div class="section-title">User Profile</div>
+      <div id="usernameLockContainer"></div>
+    </div>
 
     <div class="settings-section">
       <div class="section-title">Background Style</div>
@@ -507,659 +329,1119 @@
 </div>
 
 <script>
-const STORAGE_KEY = 'novabot_apt_v9';
-const USER_KEY    = 'novabot_apt_user_v9';
-const ACCENT_KEY  = 'novabot_apt_accent_v9';
-const BG_KEY      = 'novabot_apt_bg_v9';
-const TELEMETRY_KEY = 'novabot_apt_telemetry_v9';
+/* ───────────────────────── STORAGE ───────────────────────── */
+const STORAGE_KEY='novabot_apt_v12', USER_KEY='novabot_apt_user_v12',
+      ACCENT_KEY='novabot_apt_accent_v12', BG_KEY='novabot_apt_bg_v12',
+      TELEMETRY_KEY='novabot_apt_telemetry_v12', PROFILE_KEY='novabot_apt_profile_v12',
+      USERNAME_META_KEY='novabot_apt_username_meta_v12';
 
+const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
+
+/* ───────────────────────── TOPICS ───────────────────────── */
 const TOPICS = {
-  "00001": { title: "00001 - Trains Same Direction", cat: "Trains", desc: "Relative speed and crossing formulas for trains moving in identical directions." },
-  "00002": { title: "00002 - Trains Opposite Direction", cat: "Trains", desc: "Closing speeds and crossing times for approaching trains." },
-  "00003": { title: "00003 - Two Train Crossings", cat: "Trains", desc: "Platform lengths and bridge crossing calculations." },
-  "00004": { title: "00004 - Boats and Streams", cat: "Streams", desc: "Downstream and upstream relative velocity problems." },
-  "00005": { title: "00005 - Time and Work Efficiency", cat: "Work", desc: "Man-days, individual and combined efficiency models." },
-  "00006": { title: "00006 - Pipes and Cisterns", cat: "Work", desc: "Inlet filling rates and outlet leak drainage calculations." },
-  "00007": { title: "00007 - Profit, Loss and Discount", cat: "Commercial", desc: "Cost price, marked price, selling price margins." },
-  "00008": { title: "00008 - Simple & Compound Interest", cat: "Commercial", desc: "Interest growth curves and difference calculations." },
-  "00009": { title: "00009 - Speed and Average Speed", cat: "Distance", desc: "Variable speed metrics across equal or unequal intervals." },
-  "00010": { title: "00010 - Mixtures and Alligations", cat: "Ratios", desc: "Weighted mean pricing and concentration ratios." },
-  "00011": { title: "00011 - Calendar Odd Days", cat: "Calendars", desc: "Calculating leap years and normal year odd day counts." },
-  "00012": { title: "00012 - Day of Week Finder", cat: "Calendars", desc: "Determining exact weekdays for any historical or future date." },
-  "00013": { title: "00013 - Calendar Repetition", cat: "Calendars", desc: "Finding when calendar years repeat identically." },
-  "00014": { title: "00014 - Century Leap Years", cat: "Calendars", desc: "Divisibility rules for century boundaries." },
-  "00015": { title: "00015 - Month Shift Calculations", cat: "Calendars", desc: "Accumulated odd days across recurring months." },
-  "00016": { title: "00016 - Clocks Angle Problems", cat: "Time", desc: "Hour and minute hand angle equations at specific times." },
-  "00017": { title: "00017 - Clock Gain / Loss (Faulty)", cat: "Time", desc: "Calculating slow and fast clock synchronization." },
-  "00018": { title: "00018 - Coincidence & Right Angles", cat: "Time", desc: "Frequency of hands overlapping or forming 90 degrees." },
-  "00019": { title: "00019 - Mirror Images in Clocks", cat: "Time", desc: "Calculating exact time reflections from 11:60 or 23:60." },
-  "00020": { title: "00020 - Time Zone Intervals", cat: "Time", desc: "Relative time elapsed across multiple boundary shifts." },
-  "00021": { title: "00021 - Work & Wages Proportions", cat: "Advanced", desc: "Distributing wages based on individual efficiency ratios." },
-  "00022": { title: "00022 - Races and Skill Margins", cat: "Advanced", desc: "Linear and circular track head-starts." },
-  "00023": { title: "00023 - Permutations & Combinations", cat: "Advanced", desc: "Arrangements, selections and seating order rules." },
-  "00024": { title: "00024 - Probability Foundations", cat: "Advanced", desc: "Dice, card draws and dependent event likelihoods." },
-  "00025": { title: "00025 - Partnerships & Investments", cat: "Advanced", desc: "Profit sharing based on capital and duration ratios." },
-  "00026": { title: "00026 - Quadratic Equations", cat: "Algebra", desc: "Roots, discriminant and relationship inequalities." },
-  "00027": { title: "00027 - Progressions (AP, GP, HP)", cat: "Algebra", desc: "Summation and nth term calculations." },
-  "00028": { title: "00028 - Logarithms & Indices", cat: "Algebra", desc: "Exponential simplification rules." },
-  "00029": { title: "00029 - Mensuration 2D Areas", cat: "Geometry", desc: "Perimeters and inscribed shapes." },
-  "00030": { title: "00030 - Mensuration 3D Volumes", cat: "Geometry", desc: "Surface areas and cylinder/sphere capacities." }
+  "00001": { title:"00001 - Trains Same Direction", cat:"Trains", desc:"Relative speed and crossing formulas for trains moving in identical directions." },
+  "00002": { title:"00002 - Trains Opposite Direction", cat:"Trains", desc:"Closing speeds and crossing times for approaching trains." },
+  "00003": { title:"00003 - Two Train Crossings", cat:"Trains", desc:"Platform lengths and bridge crossing calculations." },
+  "00004": { title:"00004 - Boats and Streams", cat:"Streams", desc:"Downstream and upstream relative velocity problems." },
+  "00005": { title:"00005 - Time and Work Efficiency", cat:"Work", desc:"Man-days, individual and combined efficiency models." },
+  "00006": { title:"00006 - Pipes and Cisterns", cat:"Work", desc:"Inlet filling rates and outlet leak drainage calculations." },
+  "00007": { title:"00007 - Profit, Loss and Discount", cat:"Commercial", desc:"Cost price, marked price, selling price margins." },
+  "00008": { title:"00008 - Simple & Compound Interest", cat:"Commercial", desc:"Interest growth curves and difference calculations." },
+  "00009": { title:"00009 - Speed and Average Speed", cat:"Distance", desc:"Variable speed metrics across equal or unequal intervals." },
+  "00010": { title:"00010 - Mixtures and Alligations", cat:"Ratios", desc:"Weighted mean pricing and concentration ratios." },
+  "00011": { title:"00011 - Calendar Odd Days", cat:"Calendars", desc:"Calculating leap years and normal year odd day counts." },
+  "00012": { title:"00012 - Day of Week Finder", cat:"Calendars", desc:"Determining exact weekdays for any historical or future date." },
+  "00013": { title:"00013 - Calendar Repetition", cat:"Calendars", desc:"Finding when calendar years repeat identically." },
+  "00014": { title:"00014 - Century Leap Years", cat:"Calendars", desc:"Divisibility rules for century boundaries." },
+  "00015": { title:"00015 - Month Shift Calculations", cat:"Calendars", desc:"Accumulated odd days across recurring months." },
+  "00016": { title:"00016 - Clocks Angle Problems", cat:"Time", desc:"Hour and minute hand angle equations at specific times." },
+  "00017": { title:"00017 - Clock Gain / Loss (Faulty)", cat:"Time", desc:"Calculating slow and fast clock synchronization." },
+  "00018": { title:"00018 - Coincidence & Right Angles", cat:"Time", desc:"Frequency of hands overlapping or forming 90 degrees." },
+  "00019": { title:"00019 - Mirror Images in Clocks", cat:"Time", desc:"Calculating exact time reflections from 11:60 or 23:60." },
+  "00020": { title:"00020 - Time Zone Intervals", cat:"Time", desc:"Relative time elapsed across multiple boundary shifts." },
+  "00021": { title:"00021 - Work & Wages Proportions", cat:"Advanced", desc:"Distributing wages based on individual efficiency ratios." },
+  "00022": { title:"00022 - Races and Skill Margins", cat:"Advanced", desc:"Linear and circular track head-starts." },
+  "00023": { title:"00023 - Permutations & Combinations", cat:"Advanced", desc:"Arrangements, selections and seating order rules." },
+  "00024": { title:"00024 - Probability Foundations", cat:"Advanced", desc:"Dice, card draws and dependent event likelihoods." },
+  "00025": { title:"00025 - Partnerships & Investments", cat:"Advanced", desc:"Profit sharing based on capital and duration ratios." },
+  "00026": { title:"00026 - Quadratic Equations", cat:"Algebra", desc:"Roots, discriminant and relationship inequalities." },
+  "00027": { title:"00027 - Progressions (AP, GP, HP)", cat:"Algebra", desc:"Summation and nth term calculations." },
+  "00028": { title:"00028 - Logarithms & Indices", cat:"Algebra", desc:"Exponential simplification rules." },
+  "00029": { title:"00029 - Mensuration 2D Areas", cat:"Geometry", desc:"Perimeters and inscribed shapes." },
+  "00030": { title:"00030 - Mensuration 3D Volumes", cat:"Geometry", desc:"Surface areas and cylinder/sphere capacities." },
+  "00031": { title:"00031 - Date Format & Month Finder", cat:"Calendar Dates", desc:"Identify the month name from its number and the date format for any given date." },
+  "00032": { title:"00032 - Day of the Week (Any Date)", cat:"Calendar Dates", desc:"Determine the exact weekday for any historical or future date using Zeller's congruence." },
+  "00033": { title:"00033 - Sundays in a Month", cat:"Calendar Dates", desc:"Count how many Sundays fall in a given month and year." },
+  "00034": { title:"00034 - Sundays in a Year", cat:"Calendar Dates", desc:"Count how many Sundays (or any weekday) occur in a full year." }
 };
 
-const state = {
-  username: null,
-  bgType: 'light',
-  bgCustomUrl: '',
-  chats: {},
-  activeId: null,
-  questionStartTime: null,
-  lastTelemetry: null
-};
+/* ───────────────────────── STATE ───────────────────────── */
+const state = { username:null, usernameFirstSet:true, usernameLastChanged:0,
+  bgType:'light', bgCustomUrl:'', chats:{}, activeId:null,
+  questionStartTime:null, lastTelemetry:null, currentQDetails:null, showProfile:false, profile:{} };
 
-function loadState() {
-  try {
+/* ───────────────────────── PERSISTENCE ───────────────────────── */
+function loadState(){
+  try{
     state.username = localStorage.getItem(USER_KEY);
-    state.bgType = localStorage.getItem(BG_KEY + '_type') || 'light';
-    state.bgCustomUrl = localStorage.getItem(BG_KEY + '_url') || '';
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) state.chats = JSON.parse(raw);
-    const active = localStorage.getItem('novabot_apt_active_v9');
-    if (active && state.chats[active]) state.activeId = active;
-    const tel = localStorage.getItem(TELEMETRY_KEY);
-    if (tel) state.lastTelemetry = JSON.parse(tel);
-  } catch(e) {}
+    const metaRaw = localStorage.getItem(USERNAME_META_KEY);
+    if(metaRaw){
+      const meta = JSON.parse(metaRaw);
+      state.usernameFirstSet = !!meta.firstSet;
+      state.usernameLastChanged = meta.lastChanged || 0;
+    }
+    state.bgType = localStorage.getItem(BG_KEY+'_type') || 'light';
+    state.bgCustomUrl = localStorage.getItem(BG_KEY+'_url') || '';
+    const raw = localStorage.getItem(STORAGE_KEY); if(raw) state.chats = JSON.parse(raw);
+    const active = localStorage.getItem('novabot_apt_active_v12');
+    if(active && state.chats[active]) state.activeId = active;
+    const tel = localStorage.getItem(TELEMETRY_KEY); if(tel) state.lastTelemetry = JSON.parse(tel);
+    const prof = localStorage.getItem(PROFILE_KEY); if(prof) state.profile = JSON.parse(prof);
+  }catch(e){}
 }
-
-function saveState() {
-  try {
-    if (state.username) localStorage.setItem(USER_KEY, state.username);
-    localStorage.setItem(BG_KEY + '_type', state.bgType);
-    localStorage.setItem(BG_KEY + '_url', state.bgCustomUrl);
+function saveState(){
+  try{
+    if(state.username) localStorage.setItem(USER_KEY, state.username);
+    localStorage.setItem(USERNAME_META_KEY, JSON.stringify({ firstSet: state.usernameFirstSet, lastChanged: state.usernameLastChanged }));
+    localStorage.setItem(BG_KEY+'_type', state.bgType);
+    localStorage.setItem(BG_KEY+'_url', state.bgCustomUrl);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.chats));
-    if (state.activeId) localStorage.setItem('novabot_apt_active_v9', state.activeId);
-    if (state.lastTelemetry) localStorage.setItem(TELEMETRY_KEY, JSON.stringify(state.lastTelemetry));
-  } catch(e) {}
+    if(state.activeId) localStorage.setItem('novabot_apt_active_v12', state.activeId);
+    if(state.lastTelemetry) localStorage.setItem(TELEMETRY_KEY, JSON.stringify(state.lastTelemetry));
+    localStorage.setItem(PROFILE_KEY, JSON.stringify(state.profile));
+  }catch(e){}
 }
 
+/* ───────────────────────── HELPERS ───────────────────────── */
 const $ = id => document.getElementById(id);
-const onboardingOverlay = $('onboardingOverlay'), onboardingForm = $('onboardingForm'), usernameInput = $('usernameInput');
-const greetOverlay = $('greetOverlay'), greetMessageText = $('greetMessageText');
-const sidebar = $('sidebar'), historyList = $('historyList'), messagesEl = $('messages');
-const directoryOverlay = $('directoryOverlay'), directoryGrid = $('directoryGrid');
-const chatCountEl = $('chatCount'), settingsOverlay = $('settingsOverlay');
-const nextGlobalBtn = $('nextGlobalBtn');
+const onboardingOverlay=$('onboardingOverlay'), onboardingForm=$('onboardingForm'), usernameInput=$('usernameInput');
+const greetOverlay=$('greetOverlay'), greetMessageText=$('greetMessageText');
+const sidebar=$('sidebar'), historyList=$('historyList'), messagesEl=$('messages');
+const directoryOverlay=$('directoryOverlay'), directoryGrid=$('directoryGrid');
+const chatCountEl=$('chatCount'), settingsOverlay=$('settingsOverlay');
+const nextGlobalBtn=$('nextGlobalBtn'), profileView=$('profileView'), profileBtn=$('profileBtn');
 
-/* BACKGROUND & THEME */
-function applyBackground() {
-  if (state.bgType === 'dark') {
-    document.documentElement.classList.add('dark');
-    document.body.style.backgroundImage = 'none';
-    document.body.style.backgroundColor = '#0f1117';
-  } else if (state.bgType === 'light') {
-    document.documentElement.classList.remove('dark');
-    document.body.style.backgroundImage = 'none';
-    document.body.style.backgroundColor = '#f5f3ff';
-  } else if (state.bgType === 'upload' && state.bgCustomUrl) {
-    document.body.style.backgroundImage = `url(${state.bgCustomUrl})`;
-    document.body.style.backgroundSize = 'cover';
+function rnd(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function shuffle(arr){ return arr.sort(()=>Math.random()-0.5); }
+function gcd(a,b){ return b===0?Math.abs(a):gcd(b,a%b); }
+
+function makeIntOptions(correct, spread=4){
+  const opts = new Set([correct]);
+  let guard = 0;
+  while(opts.size < 4 && guard++ < 200){
+    let cand = correct + rnd(-spread, spread);
+    if(cand === correct || cand <= 0) cand = correct + rnd(1, spread+3);
+    if(cand > 0) opts.add(cand);
+  }
+  let pad = 1;
+  while(opts.size < 4){ opts.add(correct + spread + pad); pad++; }
+  return shuffle([...opts]);
+}
+
+/* ───────────────────────── USERNAME LOCK ───────────────────────── */
+function canChangeUsername(){
+  // First time ever → always allowed (the onboarding username isn't a "change").
+  if(state.usernameFirstSet === false) return { allowed: true, reason: 'first' };
+  // After first set, 90 days must pass.
+  const now = Date.now();
+  const nextAllowed = (state.usernameLastChanged || 0) + NINETY_DAYS_MS;
+  if(now >= nextAllowed) return { allowed: true, reason: 'cooldown' };
+  const daysLeft = Math.ceil((nextAllowed - now) / (24*60*60*1000));
+  return { allowed: false, reason: 'locked', daysLeft, nextAllowed };
+}
+
+function renderUsernameLockBox(){
+  const container = $('usernameLockContainer');
+  if(!container) return;
+  const status = canChangeUsername();
+  let statusHtml = '';
+  if(status.reason === 'first'){
+    statusHtml = `<div class="ul-status available">✅ Free first-time username change available.</div>`;
+  } else if(status.reason === 'cooldown'){
+    statusHtml = `<div class="ul-status available">✅ You can change your username now.</div>`;
+  } else {
+    const d = new Date(status.nextAllowed);
+    statusHtml = `<div class="ul-status locked">🔒 Locked — next change in <strong>${status.daysLeft} day(s)</strong> (after ${d.toLocaleDateString()}).</div>`;
+  }
+  container.innerHTML = `
+    <div class="username-lock-box">
+      <div class="ul-label">Current Username</div>
+      <div class="ul-name">${state.username || '—'}</div>
+      ${statusHtml}
+      <div class="username-change-row">
+        <input type="text" id="newUsernameInput" placeholder="Enter new username..." maxlength="30" ${status.allowed ? '' : 'disabled'}>
+        <button id="changeUsernameBtn" ${status.allowed ? '' : 'disabled'}>Change</button>
+      </div>
+      <div style="font-size:11px; color:var(--muted); margin-top:8px;">Note: Username changes are limited to once every 90 days (first change is free).</div>
+    </div>`;
+  const btn = $('changeUsernameBtn');
+  if(btn && status.allowed){
+    btn.onclick = () => {
+      const val = $('newUsernameInput').value.trim();
+      if(!val){ alert('Please enter a username.'); return; }
+      if(val === state.username){ alert('That is already your username.'); return; }
+      state.username = val;
+      state.usernameFirstSet = true;
+      state.usernameLastChanged = Date.now();
+      saveState();
+      greetMessageText.textContent = `Hello, ${val}!`;
+      renderUsernameLockBox();
+      renderProfileView();
+      alert(`Username changed to "${val}". Next change allowed in 90 days.`);
+    };
   }
 }
 
-function applyAccent(accent) {
+/* ───────────────────────── BACKGROUND / ACCENT ───────────────────────── */
+function applyBackground(){
+  if(state.bgType==='dark'){
+    document.documentElement.classList.add('dark');
+    document.body.style.backgroundImage='none'; document.body.style.backgroundColor='#0f1117';
+  } else if(state.bgType==='light'){
+    document.documentElement.classList.remove('dark');
+    document.body.style.backgroundImage='none'; document.body.style.backgroundColor='#f5f3ff';
+  } else if(state.bgType==='upload' && state.bgCustomUrl){
+    document.body.style.backgroundImage=`url(${state.bgCustomUrl})`;
+    document.body.style.backgroundSize='cover';
+  }
+}
+function applyAccent(accent){
   document.documentElement.classList.remove('accent-red','accent-green','accent-yellow','accent-violet');
-  document.documentElement.classList.add('accent-' + accent);
-  document.querySelectorAll('.color-btn').forEach(b => b.classList.toggle('active', b.dataset.accent === accent));
+  document.documentElement.classList.add('accent-'+accent);
+  document.querySelectorAll('.color-btn').forEach(b=>b.classList.toggle('active', b.dataset.accent===accent));
   localStorage.setItem(ACCENT_KEY, accent);
 }
-
-document.querySelectorAll('.bg-pick-btn[data-bg]').forEach(btn => {
-  btn.onclick = () => {
-    document.querySelectorAll('.bg-pick-btn').forEach(b => b.classList.remove('active'));
+document.querySelectorAll('.bg-pick-btn[data-bg]').forEach(btn=>{
+  btn.onclick = ()=>{
+    document.querySelectorAll('.bg-pick-btn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    state.bgType = btn.dataset.bg;
-    state.bgCustomUrl = '';
-    applyBackground();
-    saveState();
+    state.bgType = btn.dataset.bg; state.bgCustomUrl='';
+    applyBackground(); saveState();
   };
 });
-
-$('bgFileInput').onchange = (e) => {
-  const f = e.target.files[0];
-  if (!f) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    state.bgType = 'upload';
-    state.bgCustomUrl = ev.target.result;
-    applyBackground();
-    saveState();
-  };
+$('bgFileInput').onchange = (e)=>{
+  const f=e.target.files[0]; if(!f) return;
+  const reader=new FileReader();
+  reader.onload=ev=>{ state.bgType='upload'; state.bgCustomUrl=ev.target.result; applyBackground(); saveState(); };
   reader.readAsDataURL(f);
 };
 $('settingsBgInput').onchange = $('bgFileInput').onchange;
-$('setLightBg').onclick = () => { state.bgType = 'light'; state.bgCustomUrl = ''; applyBackground(); saveState(); };
-$('setDarkBg').onclick = () => { state.bgType = 'dark'; state.bgCustomUrl = ''; applyBackground(); saveState(); };
-
+$('setLightBg').onclick = ()=>{ state.bgType='light'; state.bgCustomUrl=''; applyBackground(); saveState(); };
+$('setDarkBg').onclick  = ()=>{ state.bgType='dark';  state.bgCustomUrl=''; applyBackground(); saveState(); };
 applyBackground();
 applyAccent(localStorage.getItem(ACCENT_KEY) || 'violet');
 
-/* SESSIONS */
-function uid() { return 'sess_' + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
-function createSession(topicId = '00001') {
-  const id = uid();
-  const topic = TOPICS[topicId] || TOPICS["00001"];
-  state.chats[id] = { id, title: topic.title, topicId, createdAt: Date.now(), messages: [] };
-  state.activeId = id;
+/* ───────────────────────── PROFILE ───────────────────────── */
+function ensureProfile(topicId){ if(!state.profile[topicId]) state.profile[topicId]={correct:0,wrong:0}; }
+function recordAnswer(topicId,isCorrect){
+  ensureProfile(topicId);
+  if(isCorrect) state.profile[topicId].correct++;
+  else state.profile[topicId].wrong++;
   saveState();
-  initTopicIntro(topicId, id);
-  return state.chats[id];
+}
+function getProfileStats(){
+  let tc=0,tw=0;
+  Object.values(state.profile).forEach(s=>{ tc+=s.correct; tw+=s.wrong; });
+  const total=tc+tw;
+  const acc = total>0 ? ((tc/total)*100).toFixed(1) : '0.0';
+  return {totalCorrect:tc, totalWrong:tw, total, accuracy:acc};
+}
+function renderProfileView(){
+  const c=profileView;
+  if(!state.showProfile){ c.style.display='none'; return; }
+  c.style.display='block';
+  const {totalCorrect,totalWrong,total,accuracy}=getProfileStats();
+  let html=`
+    <div class="profile-card">
+      <h3>📊 ${state.username||'Learner'}'s Performance Profile</h3>
+      <div class="profile-stats-grid">
+        <div class="stat-box">
+          <div class="stat-label">Overall Accuracy</div>
+          <div class="stat-value">${accuracy}%</div>
+          <div class="stat-sub">${total} questions attempted</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Correct / Wrong</div>
+          <div class="stat-value" style="color:var(--success);">${totalCorrect} <span style="font-size:16px;color:var(--muted);">/</span> <span style="color:var(--danger);">${totalWrong}</span></div>
+          <div class="stat-sub">${totalCorrect} correct · ${totalWrong} wrong</div>
+        </div>
+      </div>
+      <div class="section-title" style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:700;margin-bottom:10px;">Topic-wise Breakdown</div>
+      <div class="topic-stats-list">`;
+  let anyShown=false;
+  Object.keys(TOPICS).sort().forEach(tid=>{
+    const s=state.profile[tid]||{correct:0,wrong:0}; const tot=s.correct+s.wrong;
+    if(tot===0) return;
+    anyShown=true;
+    const pct=tot>0?Math.round((s.correct/tot)*100):0;
+    const barColor = pct>=70?'var(--success)':pct>=40?'var(--warning)':'var(--danger)';
+    html+=`
+      <div class="topic-stat-row">
+        <span class="ts-name">${tid} · ${TOPICS[tid].title.split(' - ')[1]||''}</span>
+        <div class="ts-bar"><div class="ts-bar-fill" style="width:${pct}%;background:${barColor};"></div></div>
+        <span class="ts-count" style="color:${barColor};">${pct}% <span style="color:var(--muted);font-weight:400;">(${s.correct}✓ ${s.wrong}✗)</span></span>
+      </div>`;
+  });
+  if(!anyShown) html+=`<div style="text-align:center;padding:16px;color:var(--muted);font-style:italic;font-size:13px;">No questions attempted yet. Start a session to see your stats!</div>`;
+  html+=`
+      </div>
+      <div class="profile-footer">
+        <span class="profile-tip">💡 Keep practicing to improve your accuracy!</span>
+        <button class="reset-profile" id="resetProfileBtn">Reset Profile Stats</button>
+      </div>
+    </div>`;
+  c.innerHTML=html;
+  const rb=$('resetProfileBtn');
+  if(rb) rb.onclick=()=>{ if(confirm('Reset all profile statistics? This cannot be undone.')){ state.profile={}; saveState(); renderProfileView(); } };
+}
+function toggleProfile(){
+  state.showProfile=!state.showProfile;
+  if(state.showProfile){ profileView.style.display='block'; messagesEl.style.display='none'; renderProfileView(); }
+  else { profileView.style.display='none'; messagesEl.style.display='flex'; }
 }
 
-function getActiveSession() {
-  if (!state.activeId || !state.chats[state.activeId]) return createSession('00001');
-  return state.chats[state.activeId];
+/* ───────────────────────── SESSIONS ───────────────────────── */
+function uid(){ return 'sess_'+Date.now().toString(36)+Math.random().toString(36).slice(2,6); }
+function createSession(topicId='00001'){
+  const id=uid(); const topic=TOPICS[topicId]||TOPICS['00001'];
+  state.chats[id]={id,title:topic.title,topicId,createdAt:Date.now(),messages:[]};
+  state.activeId=id; saveState(); initTopicIntro(topicId,id); return state.chats[id];
 }
-
-window.deleteSession = function(sessionId, e) {
+function getActiveSession(){ if(!state.activeId||!state.chats[state.activeId]) return createSession('00001'); return state.chats[state.activeId]; }
+window.deleteSession=function(id,e){
   e.stopPropagation();
-  if (confirm("Are you sure you want to delete this training session?")) {
-    delete state.chats[sessionId];
-    if (state.activeId === sessionId) {
-      const remaining = Object.values(state.chats);
-      state.activeId = remaining.length ? remaining[0].id : null;
-    }
-    saveState();
-    renderAll();
+  if(confirm('Are you sure you want to delete this training session?')){
+    delete state.chats[id];
+    if(state.activeId===id){ const rem=Object.values(state.chats); state.activeId=rem.length?rem[0].id:null; }
+    saveState(); renderAll();
   }
 };
-
-function renderHistory() {
-  const chats = Object.values(state.chats).sort((a,b) => b.createdAt - a.createdAt);
-  chatCountEl.textContent = `${chats.length} active`;
-  if (!chats.length) { historyList.innerHTML = '<div class="empty-history">No sessions yet.</div>'; return; }
-  historyList.innerHTML = '';
-  chats.forEach(chat => {
-    const item = document.createElement('div');
-    item.className = 'history-item' + (chat.id === state.activeId ? ' active' : '');
-    item.onclick = () => {
-      state.activeId = chat.id;
-      saveState();
-      renderAll();
+function renderHistory(){
+  const chats=Object.values(state.chats).sort((a,b)=>b.createdAt-a.createdAt);
+  chatCountEl.textContent=`${chats.length} active`;
+  if(!chats.length){ historyList.innerHTML='<div class="empty-history">No sessions yet.</div>'; return; }
+  historyList.innerHTML='';
+  chats.forEach(chat=>{
+    const item=document.createElement('div');
+    item.className='history-item'+(chat.id===state.activeId?' active':'');
+    item.onclick=()=>{
+      state.activeId=chat.id; state.showProfile=false;
+      profileView.style.display='none'; messagesEl.style.display='flex';
+      saveState(); renderAll();
     };
-    item.innerHTML = `
-      <div class="title">${chat.title}</div>
-      <button class="del-hist-btn" title="Delete session" onclick="deleteSession('${chat.id}', event)">✕</button>
-    `;
+    item.innerHTML=`<div class="title">${chat.title}</div><button class="del-hist-btn" title="Delete session" onclick="deleteSession('${chat.id}', event)">✕</button>`;
     historyList.appendChild(item);
   });
 }
 
-function renderMessages() {
-  const sess = getActiveSession();
-  messagesEl.innerHTML = '';
-  sess.messages.forEach(m => appendMessage(m.text, m.role, m.quizData, m.cheatNotice, m.startBtn, m.loadingText, false));
+function renderMessages(){
+  if(state.showProfile) return;
+  const sess=getActiveSession();
+  messagesEl.innerHTML='';
+  sess.messages.forEach(m=>appendMessage(m.text,m.role,m.quizData,m.cheatNotice,m.startBtn,m.loadingText,false));
   scrollToBottom();
 }
 
-function appendMessage(text, role, quizData = null, cheatNotice = null, showStartBtn = false, loadingText = null, animate = true) {
-  const row = document.createElement('div');
-  row.className = `msg-row ${role}`;
-  if (!animate) row.style.animation = 'none';
+function appendMessage(text,role,quizData=null,cheatNotice=null,showStartBtn=false,loadingText=null,animate=true){
+  if(state.showProfile) return;
+  const row=document.createElement('div');
+  row.className=`msg-row ${role}`;
+  if(!animate) row.style.animation='none';
+  const bubble=document.createElement('div');
+  bubble.className='bubble';
+  bubble.innerHTML=text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
 
-  const bubble = document.createElement('div');
-  bubble.className = 'bubble';
-  bubble.innerHTML = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-  if (loadingText) {
-    const loadCard = document.createElement('div');
-    loadCard.className = 'loading-card';
-    loadCard.innerHTML = `
-      <div class="spinner"></div>
-      <div><strong>${loadingText}</strong><div style="font-size:12px; color:var(--muted); margin-top:2px;">Randomizing whole number parameters...</div></div>
-    `;
-    bubble.appendChild(loadCard);
+  if(loadingText){
+    const lc=document.createElement('div'); lc.className='loading-card';
+    lc.innerHTML=`<div class="spinner"></div><div><strong>${loadingText}</strong><div style="font-size:12px;color:var(--muted);margin-top:2px;">Building realistic numbers...</div></div>`;
+    bubble.appendChild(lc);
   }
-
-  if (showStartBtn) {
-    const sBtn = document.createElement('button');
-    sBtn.className = 'start-gen-btn';
-    sBtn.innerHTML = '🟢 Start Training Questions';
-    sBtn.onclick = () => triggerQuestionGeneration(quizData.topicId, quizData.sessId, sBtn);
+  if(showStartBtn){
+    const sBtn=document.createElement('button');
+    sBtn.className='start-gen-btn';
+    sBtn.innerHTML='🟢 Start Training Questions';
+    sBtn.onclick=()=>triggerQuestionGeneration(quizData.topicId,quizData.sessId,sBtn);
     bubble.appendChild(sBtn);
   }
-
-  if (quizData && !showStartBtn && !loadingText) {
-    const card = document.createElement('div');
-    card.className = 'quiz-card';
-    card.innerHTML = `
-      <h4>Practice Question (${quizData.topicId})</h4>
-      <p style="margin-bottom:10px; font-weight:500;">${quizData.question}</p>
-      <div class="quiz-options" id="options_${quizData.qid}"></div>
-    `;
-    const optsDiv = card.querySelector(`#options_${quizData.qid}`);
-    quizData.options.forEach((opt, idx) => {
-      const btn = document.createElement('button');
-      btn.className = 'quiz-option-btn';
-      btn.textContent = `${String.fromCharCode(65 + idx)}. ${opt}`;
-      btn.onclick = () => handleQuizAnswer(quizData, idx, btn);
+  if(quizData && !showStartBtn && !loadingText){
+    const card=document.createElement('div'); card.className='quiz-card';
+    card.innerHTML=`<h4>Practice Question (${quizData.topicId})</h4><p style="margin-bottom:10px;font-weight:500;">${quizData.question}</p><div class="quiz-options" id="options_${quizData.qid}"></div>`;
+    const optsDiv=card.querySelector(`#options_${quizData.qid}`);
+    quizData.options.forEach((opt,idx)=>{
+      const btn=document.createElement('button');
+      btn.className='quiz-option-btn';
+      btn.textContent=`${String.fromCharCode(65+idx)}. ${opt}`;
+      btn.onclick=()=>handleQuizAnswer(quizData,idx,btn);
       optsDiv.appendChild(btn);
     });
     bubble.appendChild(card);
   }
-
-  if (cheatNotice) {
-    const cBox = document.createElement('div');
-    cBox.className = 'cheat-box';
-    cBox.innerHTML = `
-      <span>🤖 <strong>AI Caught:</strong> ${cheatNotice.msg}</span>
-      <div>
-        <button onclick="handleCheatResponse('${cheatNotice.sessId}', true)">Yes</button>
-        <button onclick="handleCheatResponse('${cheatNotice.sessId}', false)" style="background:#6b7280; margin-left:4px;">No</button>
-      </div>
-    `;
+  if(cheatNotice){
+    const cBox=document.createElement('div'); cBox.className='cheat-box';
+    cBox.innerHTML=`<span>🤖 <strong>AI Caught:</strong> ${cheatNotice.msg}</span><div><button onclick="handleCheatResponse('${cheatNotice.sessId}', true)">Yes</button><button onclick="handleCheatResponse('${cheatNotice.sessId}', false)" style="background:#6b7280;margin-left:4px;">No</button></div>`;
     bubble.appendChild(cBox);
   }
-
   row.appendChild(bubble);
   messagesEl.appendChild(row);
   scrollToBottom();
 }
+function scrollToBottom(){ requestAnimationFrame(()=>{ messagesEl.scrollTop=messagesEl.scrollHeight; }); }
 
-function scrollToBottom() {
-  requestAnimationFrame(() => { messagesEl.scrollTop = messagesEl.scrollHeight; });
-}
-
-function renderDirectory() {
-  directoryGrid.innerHTML = '';
-  Object.keys(TOPICS).forEach(tId => {
-    const topic = TOPICS[tId];
-    const card = document.createElement('div');
-    card.className = 'dir-card';
-    card.innerHTML = `
-      <div>
-        <h3>${topic.title}</h3>
-        <p>${topic.desc}</p>
-      </div>
-      <button onclick="selectTopicFromDirectory('${tId}')">Start This Topic</button>
-    `;
+function renderDirectory(){
+  directoryGrid.innerHTML='';
+  Object.keys(TOPICS).forEach(tId=>{
+    const t=TOPICS[tId];
+    const card=document.createElement('div'); card.className='dir-card';
+    card.innerHTML=`<div><h3>${t.title}</h3><p>${t.desc}</p></div><button onclick="selectTopicFromDirectory('${tId}')">Start This Topic</button>`;
     directoryGrid.appendChild(card);
   });
 }
-
-window.selectTopicFromDirectory = function(tId) {
+window.selectTopicFromDirectory=function(tId){
   directoryOverlay.classList.remove('open');
-  createSession(tId);
-  renderAll();
+  state.showProfile=false; profileView.style.display='none'; messagesEl.style.display='flex';
+  createSession(tId); renderAll();
 };
-
-function renderAnalysisTable() {
-  const section = $('analysisSection');
-  const tbody = $('analysisTableBody');
-  if (!state.lastTelemetry) {
-    section.style.display = 'none';
-    return;
-  }
-  section.style.display = 'block';
-  const log = state.lastTelemetry;
-  tbody.innerHTML = `
-    <tr class="analysis-row">
-      <td>${log.topicId}</td>
-      <td style="color:${log.correct ? '#22c55e' : '#ef4444'}; font-weight:700;">${log.correct ? 'Correct' : 'Incorrect'}</td>
-      <td>${log.duration}s</td>
-      <td><button style="padding:4px 8px; background:var(--accent); color:#fff; border:none; border-radius:4px; cursor:pointer;" onclick="runStepAnalysis()">View Steps</button></td>
-    </tr>
-  `;
+function renderAnalysisTable(){
+  const section=$('analysisSection'), tbody=$('analysisTableBody');
+  if(!state.lastTelemetry){ section.style.display='none'; return; }
+  section.style.display='block';
+  const log=state.lastTelemetry;
+  tbody.innerHTML=`<tr class="analysis-row"><td>${log.topicId}</td><td style="color:${log.correct?'var(--success)':'var(--danger)'};font-weight:700;">${log.correct?'Correct':'Incorrect'}</td><td>${log.duration}s</td><td><button style="padding:4px 8px;background:var(--accent);color:#fff;border:none;border-radius:4px;cursor:pointer;" onclick="runStepAnalysis()">View Steps</button></td></tr>`;
 }
-
-window.runStepAnalysis = function() {
-  const log = state.lastTelemetry;
-  if (!log) return;
-  const sess = getActiveSession();
-  
-  sess.messages.push({ role: 'bot', text: `🔍 Analyzing calculation telemetry...`, loadingText: "Analyzing steps..." });
+window.runStepAnalysis=function(){
+  const log=state.lastTelemetry; if(!log) return;
+  const sess=getActiveSession();
+  sess.messages.push({role:'bot',text:`🔍 Analyzing calculation telemetry...`,loadingText:"Analyzing steps..."});
   saveState(); renderMessages();
-
-  setTimeout(() => {
+  setTimeout(()=>{
     sess.messages.pop();
-    sess.messages.push({ role: 'bot', text: `📊 **Step-by-Step Telemetry Analysis (${log.topicId}):**\n\n${log.explanation}` });
+    sess.messages.push({role:'bot',text:`📊 **Step-by-Step Telemetry Analysis (${log.topicId}):**\n\n${log.explanation}`});
     saveState(); renderMessages();
-  }, 2500);
+  },2000);
+};
+function renderAll(){ renderHistory(); renderAnalysisTable(); renderMessages(); if(state.showProfile) renderProfileView(); }
+
+/* ───────────────────────── TOPIC INTRO ───────────────────────── */
+const FORMULA_DB = {
+  "00001":{ diag:`[Train A (v₁)] ----> overtaking ----> [Train B (v₂)]`, title:"Trains Same Direction", f1:"Relative Speed = Speed₁ − Speed₂", f2:"Time = (L₁ + L₂) / Relative Speed", logic:"Effective closing speed is the difference of speeds." },
+  "00002":{ diag:`[Train A (v₁)] <---- approaching ----> [Train B (v₂)]`, title:"Trains Opposite Direction", f1:"Relative Speed = Speed₁ + Speed₂", f2:"Time = (L₁ + L₂) / Relative Speed", logic:"Approaching bodies add speeds together." },
+  "00003":{ diag:`[Train] ----> [Platform / Bridge] ----> [Exit]`, title:"Platform & Bridge Crossing", f1:"Distance = Train Length + Platform Length", f2:"Time = Total Distance / Speed", logic:"The engine must clear the platform entirely." },
+  "00004":{ diag:`Upstream: Boat − Stream | Downstream: Boat + Stream`, title:"Boats & Streams", f1:"Downstream = B + S, Upstream = B − S", f2:"Boat = (D + U)/2, Stream = (D − U)/2", logic:"Stream assists downstream, opposes upstream." },
+  "00005":{ diag:`A (n days) + B (m days) → 1/n + 1/m per day`, title:"Time & Work", f1:"Work rate = 1 / Days", f2:"Combined rate = 1/A + 1/B", logic:"Add individual rates to get combined rate." },
+  "00006":{ diag:`Inlet (+) fills | Outlet (−) drains`, title:"Pipes & Cisterns", f1:"Net rate = Inlet − Outlet", f2:"Time = 1 / Net Rate", logic:"Outlets subtract from inlet filling rates." },
+  "00007":{ diag:`CP ---> MP ---> SP`, title:"Profit, Loss & Discount", f1:"Profit% = (SP − CP)/CP × 100", f2:"Discount% = (MP − SP)/MP × 100", logic:"Discount is on marked price, profit on cost." },
+  "00008":{ diag:`SI grows linearly | CI grows exponentially`, title:"Interest", f1:"SI = P × R × T / 100", f2:"CI = P(1 + R/100)ᵀ − P", logic:"CI compounds; SI does not." },
+  "00009":{ diag:`v₁ ---> v₂ ---> v₃ across equal/unequal segments`, title:"Average Speed", f1:"Avg = Total Distance / Total Time", f2:"Equal distances: Avg = 2v₁v₂/(v₁+v₂)", logic:"Harmonic mean for equal distances." },
+  "00010":{ diag:`[Solution A] + [Solution B] → Mixture`, title:"Mixtures & Alligations", f1:"Alligation: Qty1/Qty2 = (C₂ − M)/(M − C₁)", f2:"Mixture ratio from weighted averages", logic:"Weighted mean of concentrations." },
+  "00011":{ diag:`Odd Days: normal year = 1, leap year = 2`, title:"Calendar Odd Days", f1:"Odd Days in 100 yrs = 5, 400 yrs = 0", f2:"Leap year: divisible by 4 (not 100 unless 400)", logic:"Count remainders after dividing by 7." },
+  "00012":{ diag:`Reference Date + Odd Days → Target Date`, title:"Day of Week Finder", f1:"Day = (Reference Day + Odd Days) mod 7", f2:"Odd days per month vary (28→0, 31→3)", logic:"Accumulate odd days between dates." },
+  "00013":{ diag:`Year Y calendar = Year Y+n calendar`, title:"Calendar Repetition", f1:"Normal→Normal repeat: +6 or +11 yrs", f2:"Leap→Leap repeat: +28 yrs (typical)", logic:"Depends on accumulated odd days = multiple of 7." },
+  "00014":{ diag:`Century year divisible by 400? Leap : Not Leap`, title:"Century Leap Years", f1:"400-divisible → leap", f2:"100-divisible but not 400 → not leap", logic:"1600 & 2000 are leap; 1700,1800,1900 are not." },
+  "00015":{ diag:`Month shifts: Jan(3), Feb(0/1), Mar(3)…`, title:"Month Shift", f1:"Normal month odd days: 31→3, 30→2, 28→0", f2:"Feb leap = 1, non-leap = 0", logic:"Sum odd days across months, mod 7." },
+  "00016":{ diag:`Angle = |30H − 5.5M| degrees`, title:"Clock Angle", f1:"Angle = |30H − 5.5M|", f2:"If > 180, use 360 − angle", logic:"Hour hand 0.5°/min, minute hand 6°/min." },
+  "00017":{ diag:`Faulty clock gains/loses vs. true time`, title:"Faulty Clock", f1:"Gain/Loss over T true mins = (T × rate diff)", f2:"Correct time = True time × (True rate / Faulty rate)", logic:"Proportional reasoning over elapsed time." },
+  "00018":{ diag:`Coincidence: 11 times/12 hrs | Right angle: 22 times/12 hrs`, title:"Clock Coincidences", f1:"Coincidence interval = 65 5/11 min", f2:"Right angle interval = 32 8/11 min", logic:"Relative speed of hands = 5.5°/min." },
+  "00019":{ diag:`Mirror time = 11:60 − clock time (or 23:60)`, title:"Mirror Clock", f1:"If clock ≤ 11:00 → mirror = 11:60 − t", f2:"If clock > 11:00 → mirror = 23:60 − t", logic:"Reflect across 12:00 axis." },
+  "00020":{ diag:`TZ₁ ---- Δ1 ---- TZ₂ ---- Δ2 ---- TZ₃`, title:"Time Zone Intervals", f1:"Elapsed = Departure − Arrival in same TZ", f2:"Convert all to UTC first", logic:"Add/subtract offsets to normalize." },
+  "00021":{ diag:`Wages ∝ Work done = Rate × Time`, title:"Work & Wages", f1:"Wage ratio = (Work_i / Total Work)", f2:"Efficiency ratio → wage ratio", logic:"Pay proportional to work contribution." },
+  "00022":{ diag:`A beats B by x m | A gives B head start`, title:"Races", f1:"If A beats B by x in Lm: vA/vB = L/(L−x)", f2:"Time margin from distance margin / speed", logic:"Distances proportional to speeds." },
+  "00023":{ diag:`nPr = n!/(n−r)! | nCr = n!/(r!(n−r)!)`, title:"Permutations & Combinations", f1:"nPr = n! / (n−r)!", f2:"nCr = nPr / r!", logic:"Order matters in P; not in C." },
+  "00024":{ diag:`P(E) = Favorable / Total outcomes`, title:"Probability", f1:"P(A∪B) = P(A)+P(B)−P(A∩B)", f2:"P(A|B) = P(A∩B)/P(B)", logic:"Count outcomes or multiply independent probabilities." },
+  "00025":{ diag:`Profit ∝ Capital × Time`, title:"Partnerships", f1:"Profit ratio = (C₁T₁):(C₂T₂):…", f2:"Share_i = Total × (Ratio_i / Sum)", logic:"Weight capital by duration invested." },
+  "00026":{ diag:`ax² + bx + c = 0 | D = b² − 4ac`, title:"Quadratic Equations", f1:"Roots = (−b ± √D) / 2a", f2:"Sum = −b/a, Product = c/a", logic:"D > 0 real, D = 0 equal, D < 0 complex." },
+  "00027":{ diag:`AP: a, a+d, a+2d… | GP: a, ar, ar²…`, title:"Progressions", f1:"AP: Tₙ = a + (n−1)d, Sₙ = n/2(2a+(n−1)d)", f2:"GP: Tₙ = arⁿ⁻¹, Sₙ = a(rⁿ−1)/(r−1)", logic:"Constant difference (AP) vs. constant ratio (GP)." },
+  "00028":{ diag:`log(ab)=log a+log b | log(aⁿ)=n·log a`, title:"Logarithms", f1:"log_b(x) = ln x / ln b", f2:"log(ab)=log a + log b, log(a/b)=log a − log b", logic:"Convert exponent problems to linear ones." },
+  "00029":{ diag:`Rectangle, Triangle, Circle areas`, title:"2D Mensuration", f1:"Circle: A = πr², C = 2πr", f2:"Triangle: A = ½ × b × h", logic:"Pick the right formula for the shape." },
+  "00030":{ diag:`Cylinder, Sphere, Cone volumes`, title:"3D Mensuration", f1:"Cylinder: V = πr²h, SA = 2πr(r+h)", f2:"Sphere: V = 4/3 πr³, SA = 4πr²", logic:"Units cube for volume, square for area." },
+  "00031":{ diag:`Month Number (1–12) → Month Name`, title:"Date Format & Month Finder", f1:"Month 1 = January … Month 12 = December", f2:"Date format: DD/MM/YYYY or DD-MM-YYYY", logic:"Month numbers map directly to names." },
+  "00032":{ diag:`Day of Week = f(DD, MM, YYYY) via Zeller`, title:"Day of the Week (Any Date)", f1:"Zeller: h = (q + ⌊13(m+1)/5⌋ + K + ⌊K/4⌋ + ⌊J/4⌋ + 5J) mod 7", f2:"h: 0=Sat,1=Sun,2=Mon,…6=Fri", logic:"Use Zeller's congruence to compute the weekday." },
+  "00033":{ diag:`Month + Year → count Sundays`, title:"Sundays in a Month", f1:"Find the 1st weekday, then count Sundays (1st, 8th, 15th, 22nd, 29th if Sunday)", f2:"Max 5 Sundays, min 4 Sundays per month", logic:"Depends on the weekday of the 1st of the month." },
+  "00034":{ diag:`Year → count Sundays (or any weekday)`, title:"Sundays in a Year", f1:"Normal year = 365 days = 52 weeks + 1 day → 52 or 53 Sundays", f2:"Leap year = 366 days = 52 weeks + 2 days → 52 or 53 Sundays", logic:"Count which weekday the extra day(s) fall on." }
 };
 
-function renderAll() {
-  renderHistory();
-  renderAnalysisTable();
-  renderMessages();
-}
-
-/* TOPIC INTRO & FORMULA */
-function initTopicIntro(topicId, sessId) {
-  const sess = state.chats[sessId];
-  if (!sess) return;
-  sess.messages = [];
-  state.lastTelemetry = null;
-  nextGlobalBtn.style.display = 'none'; // Hide bottom next button initially
-
-  let intro = "", diagram = "", formulaTitle = "", f1 = "", f2 = "", logic = "";
-
-  if (topicId.startsWith("00001") || topicId === "00001") {
-    intro = `Welcome to **00001 - Trains Same Direction**!`;
-    diagram = `[ Train A (v₁) ] ----> overtaking ----> [ Train B (v₂) ]`;
-    formulaTitle = "Trains Same Direction Formulas";
-    f1 = "Relative Speed = Speed₁ - Speed₂";
-    f2 = "Time to Cross = (Length₁ + Length₂) / Relative Speed";
-    logic = `**Logic Breakdown:** Effective closing speed is the difference of speeds.`;
-  } else if (topicId === "00002") {
-    intro = `Welcome to **00002 - Trains Opposite Direction**!`;
-    diagram = `[ Train A (v₁) ] <---- approaching ----> [ Train B (v₂) ]`;
-    formulaTitle = "Trains Opposite Direction Formulas";
-    f1 = "Relative Speed = Speed₁ + Speed₂";
-    f2 = "Time to Cross = (Length₁ + Length₂) / (Speed₁ + Speed₂)";
-    logic = `**Logic Breakdown:** Approaching bodies add speeds together instantly.`;
-  } else {
-    intro = `Welcome to **${TOPICS[topicId].title}**!`;
-    diagram = `[ Analytical Model Setup ] ---> Parameter Processing ---> [ Solution ]`;
-    formulaTitle = "Core Formulas";
-    f1 = "Apply standard analytical modeling parameters.";
-    f2 = "Verify initial and final boundary constraints.";
-    logic = `**Logic Breakdown:** Step-by-step logical reduction simplifies complex multi-variable equations.`;
-  }
-
+function initTopicIntro(topicId, sessId){
+  const sess=state.chats[sessId]; if(!sess) return;
+  sess.messages=[]; state.lastTelemetry=null; nextGlobalBtn.style.display='none';
+  const db=FORMULA_DB[topicId]||FORMULA_DB['00001'];
+  const topic=TOPICS[topicId];
   sess.messages.push({
-    role: 'bot',
-    text: `${intro}\n\n<div class="diagram-box">📈 ${diagram}</div>\n<div class="formula-box"><h5>${formulaTitle}</h5><p>• ${f1}</p><p>• ${f2}</p></div>\n${logic}\n\nPress the green start button below when you are ready!`,
-    quizData: { topicId, sessId },
-    startBtn: true
+    role:'bot',
+    text:`Welcome to **${topic.title}**!\n\n<div class="diagram-box">📈 ${db.diag}</div>\n<div class="formula-box"><h5>${db.title} — Key Formulas</h5><p>• ${db.f1}</p><p>• ${db.f2}</p></div>\n**Logic Breakdown:** ${db.logic}\n\nPress the green start button below when you are ready!`,
+    quizData:{topicId, sessId}, startBtn:true
   });
-  saveState();
-  renderMessages();
-}
-
-/* GENERATING TRAIN SUMS (OR RELEVANT TOPIC SUMS) */
-function triggerQuestionGeneration(topicId, sessId, btnElement) {
-  if (btnElement) btnElement.remove(); // Completely remove start button in this specific chat
-  
-  const sess = state.chats[sessId];
-  let loadingLabel = topicId.startsWith("0000") && parseInt(topicId) <= 3 ? "Generating train sums..." : "Generating aptitude sums...";
-  
-  sess.messages.push({ role: 'bot', text: `⏳ Loading parameters...`, loadingText: loadingLabel });
   saveState(); renderMessages();
-
-  const randSeconds = Math.floor(Math.random() * 2) + 3; // 3 to 4 seconds
-
-  setTimeout(() => {
-    sess.messages.pop(); // remove loading message
-    generateRandomQuestion(topicId, sessId);
-    nextGlobalBtn.style.display = 'inline-flex'; // Enable bottom next button
-  }, randSeconds * 1000);
 }
 
-function generateRandomQuestion(topicId, sessId) {
-  const sess = state.chats[sessId];
-  if (!sess) return;
+/* ───────────────────────── DATE / CALENDAR HELPERS ───────────────────────── */
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-  let qText = "", options = [], correctIdx = 0, explanation = "";
-  const qid = 'q_' + Date.now();
+function isLeapYear(y){ return (y%4===0 && y%100!==0) || (y%400===0); }
 
-  if (topicId === "00001") {
-    const relSpeedKmH = [18, 36, 54, 72][Math.floor(Math.random() * 4)];
-    const speed2 = Math.floor(Math.random() * 20 + 30);
-    const speed1 = speed2 + relSpeedKmH;
-    const relMS = relSpeedKmH * (5 / 18);
-    const exactTime = Math.floor(Math.random() * 15 + 10);
-    const totalDist = Math.round(relMS * exactTime);
-    const len1 = Math.floor(totalDist / 2);
+/* Zeller's congruence — returns 0=Sunday … 6=Saturday */
+function dayOfWeekZeller(d, m, y){
+  if(m < 3){ m += 12; y -= 1; }
+  const K = y % 100;
+  const J = Math.floor(y / 100);
+  const h = (d + Math.floor(13*(m+1)/5) + K + Math.floor(K/4) + Math.floor(J/4) + 5*J) % 7;
+  // h: 0=Sat,1=Sun,2=Mon,3=Tue,4=Wed,5=Thu,6=Fri → convert to 0=Sun
+  return (h + 6) % 7;
+}
+
+/* Count occurrences of a weekday in a given month/year */
+function countWeekdayInMonth(weekday, month, year){
+  // weekday: 0=Sunday … 6=Saturday
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const firstWeekday = dayOfWeekZeller(1, month+1, year);
+  const offset = (weekday - firstWeekday + 7) % 7;
+  if(offset + 1 > daysInMonth) return 0;
+  return Math.floor((daysInMonth - offset - 1) / 7) + 1;
+}
+
+/* Count occurrences of a weekday in a full year */
+function countWeekdayInYear(weekday, year){
+  // Use Jan 1 of that year
+  const jan1 = dayOfWeekZeller(1, 1, year);
+  const days = isLeapYear(year) ? 366 : 365;
+  // First occurrence of weekday in the year
+  const offset = (weekday - jan1 + 7) % 7;
+  if(offset + 1 > days) return 0;
+  return Math.floor((days - offset - 1) / 7) + 1;
+}
+
+/* ───────────────────────── QUESTION ENGINE ───────────────────────── */
+const QGEN = {
+  "00001": ()=>{
+    const relKmh = pick([18,27,36,45,54,72]);
+    const speed2 = rnd(30,70);
+    const speed1 = speed2 + relKmh;
+    const relMS = relKmh*(5/18);
+    const t = rnd(8,25);
+    const totalDist = Math.round(relMS*t);
+    const len1 = rnd(Math.floor(totalDist*0.3), Math.floor(totalDist*0.6));
     const len2 = totalDist - len1;
-
-    qText = `Train A (${len1}m long) running at ${speed1} km/hr overtakes Train B (${len2}m long) running at ${speed2} km/hr in the same direction. How long will it take to completely pass Train B?`;
-    
-    options = [exactTime, exactTime + 5, exactTime + 8, exactTime + 12].sort(() => Math.random() - 0.5);
-    correctIdx = options.indexOf(exactTime);
-
-    explanation = `**Step-by-Step Solution:**\n1. Total Distance = ${len1} + ${len2} = ${totalDist} meters.\n2. Relative Speed = ${speed1} - ${speed2} = ${relSpeedKmH} km/hr (${relMS} m/s).\n3. Time = Distance / Relative Speed = ${totalDist} / ${relMS} = ${exactTime} seconds.`;
-  } else if (topicId === "00002") {
-    const relSpeedKmH = [36, 54, 72, 90][Math.floor(Math.random() * 4)];
-    const speed2 = Math.floor(Math.random() * 20 + 30);
-    const speed1 = relSpeedKmH - speed2;
-    const relMS = relSpeedKmH * (5 / 18);
-    const exactTime = Math.floor(Math.random() * 10 + 8);
-    const totalDist = Math.round(relMS * exactTime);
-    const len1 = Math.floor(totalDist / 2);
+    const correct = Math.round(totalDist/relMS);
+    const qText = `Train A (${len1} m long) running at ${speed1} km/hr overtakes Train B (${len2} m long) running at ${speed2} km/hr in the same direction. How many seconds to completely pass?`;
+    const explanation = `**Step-by-step:**\n1. Total distance = ${len1} + ${len2} = ${totalDist} m.\n2. Relative speed = ${speed1} − ${speed2} = ${relKmh} km/hr = ${relMS.toFixed(2)} m/s.\n3. Time = ${totalDist} ÷ ${relMS.toFixed(2)} ≈ **${correct} s**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,6).map(String), explanation };
+  },
+  "00002": ()=>{
+    const relKmh = pick([36,45,54,72,90]);
+    const speed2 = rnd(30,60);
+    const speed1 = relKmh - speed2 > 10 ? relKmh - speed2 : 20;
+    const relMS = (speed1+speed2)*(5/18);
+    const t = rnd(6,18);
+    const totalDist = Math.round(relMS*t);
+    const len1 = rnd(Math.floor(totalDist*0.35), Math.floor(totalDist*0.6));
     const len2 = totalDist - len1;
+    const correct = Math.round(totalDist/relMS);
+    const qText = `Two trains of lengths ${len1} m and ${len2} m approach each other at ${speed1} km/hr and ${speed2} km/hr in opposite directions. How many seconds to cross each other?`;
+    const explanation = `**Step-by-step:**\n1. Total distance = ${len1} + ${len2} = ${totalDist} m.\n2. Relative speed = ${speed1} + ${speed2} = ${speed1+speed2} km/hr = ${relMS.toFixed(2)} m/s.\n3. Time = ${totalDist} ÷ ${relMS.toFixed(2)} ≈ **${correct} s**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,5).map(String), explanation };
+  },
+  "00003": ()=>{
+    const trainLen = rnd(120,400);
+    const platformLen = pick([150,200,250,300,350,400,500]);
+    const speedKmh = pick([36,54,72,90]);
+    const speedMS = speedKmh*(5/18);
+    const correct = Math.round((trainLen+platformLen)/speedMS);
+    const qText = `A train ${trainLen} m long travels at ${speedKmh} km/hr. How many seconds to cross a ${platformLen} m long platform?`;
+    const explanation = `**Step-by-step:**\n1. Total distance = ${trainLen} + ${platformLen} = ${trainLen+platformLen} m.\n2. Speed = ${speedKmh} km/hr = ${speedMS.toFixed(2)} m/s.\n3. Time = ${trainLen+platformLen} ÷ ${speedMS.toFixed(2)} ≈ **${correct} s**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,6).map(String), explanation };
+  },
+  "00004": ()=>{
+    const boat = rnd(8,20);
+    const stream = rnd(2, Math.min(6, boat-2));
+    const downstream = boat+stream, upstream = boat-stream;
+    const qType = rnd(1,2);
+    if(qType===1){
+      const correct = downstream;
+      const qText = `A boat's speed in still water is ${boat} km/hr and the stream flows at ${stream} km/hr. What is the downstream speed (km/hr)?`;
+      const explanation = `**Step-by-step:**\nDownstream = Boat + Stream = ${boat} + ${stream} = **${downstream} km/hr**.`;
+      return { qText, correctVal:correct, options:makeIntOptions(correct,3).map(String), explanation };
+    } else {
+      const dist = pick([12,16,20,24,30]);
+      const correct = Math.round((dist/upstream)*60);
+      const qText = `A boat (still-water speed ${boat} km/hr) goes upstream against a ${stream} km/hr stream. How many minutes to cover ${dist} km upstream?`;
+      const explanation = `**Step-by-step:**\n1. Upstream speed = ${boat} − ${stream} = ${upstream} km/hr.\n2. Time = ${dist}/${upstream} hr = ${(dist/upstream).toFixed(2)} hr = **${correct} min**.`;
+      return { qText, correctVal:correct, options:makeIntOptions(correct,10).map(String), explanation };
+    }
+  },
+  "00005": ()=>{
+    const a = pick([6,8,10,12,15,18]);
+    const b = pick([4,6,9,12,20].filter(x=>x!==a));
+    const correct = Math.round(1/(1/a + 1/b));
+    const qText = `A can finish a job in ${a} days, B in ${b} days. Working together, how many days (nearest whole)?`;
+    const explanation = `**Step-by-step:**\n1. A's rate = 1/${a}, B's rate = 1/${b}.\n2. Combined = 1/${a} + 1/${b} = ${(1/a+1/b).toFixed(4)} per day.\n3. Time = 1 ÷ ${(1/a+1/b).toFixed(4)} ≈ **${correct} days**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,3).map(String), explanation };
+  },
+  "00006": ()=>{
+    const inlet = pick([6,8,10,12,15]);
+    const outlet = pick([12,15,20,24].filter(x=>x>inlet));
+    const correct = Math.round(1/(1/inlet - 1/outlet));
+    const qText = `An inlet pipe fills a tank in ${inlet} hrs, a drain empties it in ${outlet} hrs. With both open, how many hours to fill (nearest whole)?`;
+    const explanation = `**Step-by-step:**\n1. Net rate = 1/${inlet} − 1/${outlet} = ${(1/inlet - 1/outlet).toFixed(4)}.\n2. Time = 1 ÷ ${(1/inlet - 1/outlet).toFixed(4)} ≈ **${correct} hrs**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,3).map(String), explanation };
+  },
+  "00007": ()=>{
+    const cp = pick([200,250,300,400,500,600]);
+    const mp = cp + pick([50,100,150,200]);
+    const discPct = pick([5,10,15,20,25]);
+    const sp = Math.round(mp*(1-discPct/100));
+    const profitPct = Math.round(((sp-cp)/cp)*100);
+    const qText = `An article costs ₹${cp} and is marked at ₹${mp}. After a ${discPct}% discount, what is the profit percentage?`;
+    const explanation = `**Step-by-step:**\n1. Selling price = ${mp} × (1 − ${discPct}/100) = ₹${sp}.\n2. Profit = ${sp} − ${cp} = ₹${sp-cp}.\n3. Profit% = ${sp-cp}/${cp} × 100 ≈ **${profitPct}%**.`;
+    return { qText, correctVal:profitPct, options:makeIntOptions(profitPct,5).map(String), explanation };
+  },
+  "00008": ()=>{
+    const p = pick([1000,1500,2000,2500,3000]);
+    const r = pick([5,6,8,10,12]);
+    const t = pick([2,3,4,5]);
+    if(rnd(1,2)===1){
+      const correct = Math.round(p*r*t/100);
+      const qText = `Find the simple interest on ₹${p} at ${r}% p.a. for ${t} years.`;
+      const explanation = `**Step-by-step:**\nSI = P×R×T/100 = ${p}×${r}×${t}/100 = **₹${correct}**.`;
+      return { qText, correctVal:correct, options:makeIntOptions(correct, Math.max(50,Math.round(correct*0.15))).map(v=>'₹'+v), explanation };
+    } else {
+      const ci = Math.round(p*Math.pow(1+r/100,t) - p);
+      const qText = `Find the compound interest on ₹${p} at ${r}% p.a. for ${t} years (compounded annually).`;
+      const explanation = `**Step-by-step:**\nCI = P(1+R/100)ᵀ − P = ${p}×(1+${r}/100)^${t} − ${p} ≈ **₹${ci}**.`;
+      return { qText, correctVal:ci, options:makeIntOptions(ci, Math.max(50,Math.round(ci*0.15))).map(v=>'₹'+v), explanation };
+    }
+  },
+  "00009": ()=>{
+    const v1 = pick([30,40,50,60]);
+    const v2 = pick([20,30,40,60].filter(x=>x!==v1));
+    const correct = Math.round((2*v1*v2)/(v1+v2));
+    const qText = `A car covers the first half of a journey at ${v1} km/hr and the second half at ${v2} km/hr. What is the average speed (km/hr, nearest whole)?`;
+    const explanation = `**Step-by-step:**\nEqual distances → Avg = 2v₁v₂/(v₁+v₂) = 2×${v1}×${v2}/(${v1}+${v2}) ≈ **${correct} km/hr**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,4).map(String), explanation };
+  },
+  "00010": ()=>{
+    const c1 = pick([20,25,30,40]);
+    const c2 = pick([60,70,80,90]);
+    const m = pick([40,45,50,55,60]);
+    const ratio1 = (c2-m), ratio2 = (m-c1);
+    const g = gcd(ratio1,ratio2);
+    const correct = `${ratio1/g}:${ratio2/g}`;
+    const qText = `In what ratio must a ${c1}% solution be mixed with a ${c2}% solution to get a ${m}% mixture?`;
+    const explanation = `**Step-by-step:**\nAlligation: Qty₁/Qty₂ = (C₂ − M)/(M − C₁) = (${c2}−${m})/(${m}−${c1}) = ${ratio1}/${ratio2} = **${correct}**.`;
+    const opts = shuffle([correct, `${ratio2/g}:${ratio1/g}`, `${ratio1/g}:${(ratio2/g)+1}`, `${(ratio1/g)+1}:${ratio2/g}`]);
+    return { qText, correctVal:correct, options:opts, explanation };
+  },
+  "00011": ()=>{
+    const y = pick([100,200,300,400]);
+    const odd = (y===400)?0:(y===100?5:(y===200?3:1));
+    const correct = odd;
+    const qText = `How many odd days are there in ${y} years?`;
+    const explanation = `**Step-by-step:**\nStandard rule: 100 yrs → 5 odd, 200 → 3 odd, 300 → 1 odd, 400 → 0 odd.\nSo **${correct} odd days**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,3).map(String), explanation };
+  },
+  "00012": ()=>{
+    const baseIdx = rnd(0,6);
+    const shift = rnd(1,50);
+    const correct = DAY_NAMES[(baseIdx+shift)%7];
+    const qText = `If today is ${DAY_NAMES[baseIdx]}, what day will it be after ${shift} days?`;
+    const explanation = `**Step-by-step:**\n${shift} mod 7 = ${shift%7} → advance ${shift%7} day(s) from ${DAY_NAMES[baseIdx]} → **${correct}**.`;
+    const opts = shuffle([correct, ...shuffle(DAY_NAMES.filter(d=>d!==correct)).slice(0,3)]);
+    return { qText, correctVal:correct, options:opts, explanation };
+  },
+  "00013": ()=>{
+    const year = pick([2015,2016,2017,2018,2019,2020]);
+    const isLeap = isLeapYear(year);
+    let correct;
+    if(isLeap) correct = year+28;
+    else correct = (rnd(1,2)===1)? year+6 : year+11;
+    const qText = `After how many years will the calendar of ${year} repeat exactly? (Nearest standard answer)`;
+    const explanation = isLeap
+      ? `**Step-by-step:**\n${year} is a leap year. Leap calendars typically repeat after **28 years** → ${year+28}.`
+      : `**Step-by-step:**\n${year} is a normal year. Normal calendars repeat after **6 or 11 years** → ${year+6} (or ${year+11}).`;
+    const opts = makeIntOptions(correct, 8).map(v=>String(v)).sort(()=>Math.random()-0.5);
+    if(!opts.includes(String(correct))) opts[0]=String(correct);
+    return { qText, correctVal:String(correct), options:opts, explanation };
+  },
+  "00014": ()=>{
+    const yr = pick([1600,1700,1800,1900,2000,2100]);
+    const isLeap = (yr%400===0);
+    const correct = isLeap ? 'Leap year' : 'Not a leap year';
+    const qText = `Is ${yr} a leap year?`;
+    const explanation = `**Step-by-step:**\n${yr} is a century year. Century years are leap only if divisible by 400.\n${yr} % 400 = ${yr%400} → **${correct}**.`;
+    const opts = ['Leap year','Not a leap year','Depends on century','Cannot determine'];
+    return { qText, correctVal:correct, options:opts, explanation };
+  },
+  "00015": ()=>{
+    const m1 = rnd(0,10);
+    const leapFeb = rnd(0,1);
+    const oddDays = {0:3,1:(leapFeb?1:0),2:3,3:2,4:3,5:2,6:3,7:3,8:2,9:3,10:2,11:3};
+    const shift = oddDays[m1];
+    const correct = shift;
+    const qText = `How many odd days does ${MONTH_NAMES[m1]} have in a ${leapFeb?'leap':'normal'} year?`;
+    const explanation = `**Step-by-step:**\n${MONTH_NAMES[m1]} has ${m1===1?(leapFeb?29:28):[31,28,31,30,31,30,31,31,30,31,30,31][m1]} days → ${shift} odd day(s).`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,2).map(String), explanation };
+  },
+  "00016": ()=>{
+    const h = rnd(1,12);
+    const m = pick([0,10,15,20,30,40,45,50]);
+    let angle = Math.abs(30*h + 0.5*m - 6*m);
+    if(angle>180) angle = 360-angle;
+    const correct = Math.round(angle);
+    const qText = `What is the angle (nearest degree) between the hour and minute hands at ${h}:${String(m).padStart(2,'0')}?`;
+    const explanation = `**Step-by-step:**\nAngle = |30H − 5.5M| = |30×${h} − 5.5×${m}| = |${30*h} − ${5.5*m}| = ${Math.abs(30*h-5.5*m).toFixed(1)}°.\nReflex-adjusted → **${correct}°**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,8).map(v=>v+'°'), explanation };
+  },
+  "00017": ()=>{
+    const gainPerHr = pick([2,3,5,10]);
+    const hours = pick([6,12,24]);
+    const correct = gainPerHr*hours;
+    const qText = `A clock gains ${gainPerHr} seconds every hour. How many seconds will it gain in ${hours} hours?`;
+    const explanation = `**Step-by-step:**\nGain = ${gainPerHr} × ${hours} = **${correct} seconds**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,10).map(v=>v+' s'), explanation };
+  },
+  "00018": ()=>{
+    const type = rnd(1,2);
+    if(type===1){
+      const correct = 11;
+      const qText = `How many times do the hour and minute hands of a clock coincide in 12 hours?`;
+      const explanation = `**Step-by-step:**\nThe hands coincide **11 times** in 12 hours (at intervals of 65 5/11 min).`;
+      return { qText, correctVal:correct, options:makeIntOptions(correct,3).map(String), explanation };
+    } else {
+      const correct = 22;
+      const qText = `How many times are the hour and minute hands at right angles in 12 hours?`;
+      const explanation = `**Step-by-step:**\nRight angles occur **22 times** in 12 hours (twice per coincidence cycle).`;
+      return { qText, correctVal:correct, options:makeIntOptions(correct,4).map(String), explanation };
+    }
+  },
+  "00019": ()=>{
+    const h = rnd(1,11);
+    const m = pick([0,10,20,30,40,50]);
+    let mh = 11 - h, mm = 60 - m;
+    if(mm===60){ mm=0; mh=(mh+1); }
+    if(mh===0) mh=12;
+    if(mh>12) mh-=12;
+    const correct = `${mh}:${String(mm).padStart(2,'0')}`;
+    const qText = `What is the mirror image of a clock showing ${h}:${String(m).padStart(2,'0')}?`;
+    const explanation = `**Step-by-step:**\nMirror time = 11:60 − ${h}:${String(m).padStart(2,'0')} = **${correct}**.`;
+    const opts = shuffle([correct, `${h}:${String(m).padStart(2,'0')}`, `${(12-h)||12}:${String((60-m)%60).padStart(2,'0')}`, `${(h%12)+1}:${String(m).padStart(2,'0')}`]);
+    return { qText, correctVal:correct, options:[...new Set(opts)].slice(0,4), explanation };
+  },
+  "00020": ()=>{
+    const startTZ = pick([0,2,5.5,8,10]);
+    const endTZ = pick([-5,-4,-8,1,3]);
+    const depHour = rnd(6,14);
+    const durHours = rnd(2,10);
+    let arrivalUTC = depHour - startTZ + durHours;
+    let arrivalLocal = (arrivalUTC + endTZ + 24) % 24;
+    const correct = `${Math.floor(arrivalLocal)}:${String(Math.round((arrivalLocal%1)*60)).padStart(2,'0')}`;
+    const qText = `A flight departs at ${depHour}:00 (UTC${startTZ>=0?'+':''}${startTZ}) and takes ${durHours} hours. What is the local arrival time at UTC${endTZ>=0?'+':''}${endTZ}?`;
+    const explanation = `**Step-by-step:**\n1. Departure in UTC = ${depHour} − ${startTZ} = ${depHour-startTZ}:00.\n2. Arrival in UTC = ${depHour-startTZ} + ${durHours} = ${arrivalUTC}:00.\n3. Local arrival = UTC ${arrivalUTC} + (${endTZ}) = **${correct}**.`;
+    const opts = shuffle([correct, `${Math.floor(arrivalLocal+1)%24}:${String(Math.round(((arrivalLocal+1)%1)*60)).padStart(2,'0')}`, `${Math.floor(arrivalLocal+2)%24}:00`, `${Math.floor(arrivalLocal-1+24)%24}:00`]);
+    return { qText, correctVal:correct, options:[...new Set(opts)].slice(0,4), explanation };
+  },
+  "00021": ()=>{
+    const a = pick([4,6,8,10,12]);
+    const b = pick([4,6,8,12,15].filter(x=>x!==a));
+    const totalWage = pick([1200,1800,2400,3000,3600]);
+    const shareA = Math.round(totalWage*(1/a)/(1/a+1/b));
+    const correct = shareA;
+    const qText = `A can do a job in ${a} days, B in ${b} days. Together they earn ₹${totalWage}. What is A's share (nearest rupee)?`;
+    const explanation = `**Step-by-step:**\nWage ratio ∝ 1/days → A:B = 1/${a}:1/${b} = ${b}:${a}.\nA's share = ${totalWage} × ${b}/${a+b} ≈ **₹${correct}**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,200).map(v=>'₹'+v), explanation };
+  },
+  "00022": ()=>{
+    const L = pick([100,200,400,500]);
+    const margin = pick([10,20,25,50]);
+    const vB = pick([5,6,8,10]);
+    const vA = Math.round(vB*L/(L-margin));
+    const correct = vA;
+    const qText = `In a ${L} m race, A beats B by ${margin} m. If B's speed is ${vB} m/s, what is A's speed (m/s, nearest whole)?`;
+    const explanation = `**Step-by-step:**\nRatio vA/vB = L/(L−margin) = ${L}/${L-margin}.\nSo vA = ${vB} × ${L}/${L-margin} ≈ **${correct} m/s**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,2).map(String), explanation };
+  },
+  "00023": ()=>{
+    const n = pick([5,6,7,8]);
+    const r = pick([2,3]);
+    let correct, qText, explanation;
+    if(rnd(1,2)===1){
+      let num=1, den=1;
+      for(let i=0;i<r;i++){ num*= (n-i); den*= (i+1); }
+      correct = num/den;
+      qText = `How many ways can you choose ${r} items from ${n} distinct items?`;
+      explanation = `**Step-by-step:**\n${n}C${r} = ${n}!/(${r}!×${n-r}!) = **${correct} ways**.`;
+    } else {
+      let p=1;
+      for(let i=0;i<r;i++) p *= (n-i);
+      correct = p;
+      qText = `How many ways can you arrange ${r} items from ${n} distinct items (order matters)?`;
+      explanation = `**Step-by-step:**\n${n}P${r} = ${n}!/(${n-r}!) = **${correct} ways**.`;
+    }
+    return { qText, correctVal:correct, options:makeIntOptions(correct,6).map(String), explanation };
+  },
+  "00024": ()=>{
+    const type = rnd(1,3);
+    let correct, qText, explanation;
+    if(type===1){
+      correct = '1/6';
+      qText = `A fair die is rolled once. What is the probability of getting a 4?`;
+      explanation = `**Step-by-step:**\nFavorable = 1 (only 4), total = 6 → **1/6**.`;
+    } else if(type===2){
+      correct = '1/2';
+      qText = `A fair coin is tossed once. What is the probability of getting heads?`;
+      explanation = `**Step-by-step:**\nFavorable = 1, total = 2 → **1/2**.`;
+    } else {
+      correct = '1/13';
+      qText = `A card is drawn from a standard 52-card deck. What is the probability it is an Ace?`;
+      explanation = `**Step-by-step:**\n4 Aces / 52 cards = 4/52 = **1/13**.`;
+    }
+    const opts = shuffle([correct, '1/2','1/3','1/4','1/6','1/13','2/13','1/52'].filter(v=>v!==correct)).slice(0,3);
+    return { qText, correctVal:correct, options:[correct,...opts], explanation };
+  },
+  "00025": ()=>{
+    const c1 = pick([1000,2000,3000,4000]);
+    const c2 = pick([1000,2000,3000,5000].filter(x=>x!==c1));
+    const t1 = pick([6,12,18]);
+    const t2 = pick([6,12,24]);
+    const totalProfit = pick([1200,2400,3600,4800]);
+    const w1 = c1*t1, w2 = c2*t2;
+    const share1 = Math.round(totalProfit * w1/(w1+w2));
+    const correct = share1;
+    const qText = `A invests ₹${c1} for ${t1} months; B invests ₹${c2} for ${t2} months. Total profit = ₹${totalProfit}. What is A's share?`;
+    const explanation = `**Step-by-step:**\nProfit ratio = C₁T₁ : C₂T₂ = ${c1}×${t1} : ${c2}×${t2} = ${w1} : ${w2}.\nA's share = ${totalProfit} × ${w1}/${w1+w2} ≈ **₹${correct}**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,200).map(v=>'₹'+v), explanation };
+  },
+  "00026": ()=>{
+    const r1 = rnd(-6,6), r2 = rnd(-6,6);
+    const a = 1, b = -(r1+r2), c = r1*r2;
+    const correct = `${r1} and ${r2}`;
+    const qText = `Find the roots of x² ${b>=0?'+':''}${b}x ${c>=0?'+':''}${c} = 0.`;
+    const explanation = `**Step-by-step:**\nSum = −b = ${r1+r2}, Product = c = ${r1*r2}.\nRoots are **${r1} and ${r2}**.`;
+    const opts = shuffle([correct, `${r1} and ${-r2}`, `${-r1} and ${r2}`, `${-r1} and ${-r2}`]);
+    return { qText, correctVal:correct, options:[...new Set(opts)].slice(0,4), explanation };
+  },
+  "00027": ()=>{
+    if(rnd(1,2)===1){
+      const a = rnd(1,10), d = rnd(2,8), n = rnd(6,20);
+      const correct = a + (n-1)*d;
+      const qText = `In an AP with first term ${a} and common difference ${d}, find the ${n}th term.`;
+      const explanation = `**Step-by-step:**\nTₙ = a + (n−1)d = ${a} + (${n}−1)×${d} = **${correct}**.`;
+      return { qText, correctVal:correct, options:makeIntOptions(correct,6).map(String), explanation };
+    } else {
+      const a = rnd(1,5), r = rnd(2,3), n = rnd(4,6);
+      const correct = a * Math.pow(r, n-1);
+      const qText = `In a GP with first term ${a} and common ratio ${r}, find the ${n}th term.`;
+      const explanation = `**Step-by-step:**\nTₙ = arⁿ⁻¹ = ${a}×${r}^${n-1} = **${correct}**.`;
+      return { qText, correctVal:correct, options:makeIntOptions(correct, Math.max(4,Math.round(correct*0.3))).map(String), explanation };
+    }
+  },
+  "00028": ()=>{
+    const base = pick([2,3,5,10]);
+    const exp = rnd(2,5);
+    const value = Math.pow(base, exp);
+    const correct = exp;
+    const qText = `Evaluate log_${base}(${value}).`;
+    const explanation = `**Step-by-step:**\n${base}^${exp} = ${value}, so log_${base}(${value}) = **${exp}**.`;
+    return { qText, correctVal:correct, options:makeIntOptions(correct,2).map(String), explanation };
+  },
+  "00029": ()=>{
+    const type = rnd(1,3);
+    let correct, qText, explanation;
+    if(type===1){
+      const r = pick([7,14,21]);
+      correct = Math.round(Math.PI*r*r);
+      qText = `Find the area (cm²) of a circle with radius ${r} cm (use π ≈ 3.14).`;
+      explanation = `**Step-by-step:**\nA = πr² = 3.14 × ${r}² = **${correct} cm²**.`;
+    } else if(type===2){
+      const b = pick([6,8,10,12]);
+      const h = pick([4,5,7,9]);
+      correct = Math.round(0.5*b*h);
+      qText = `Find the area (cm²) of a triangle with base ${b} cm and height ${h} cm.`;
+      explanation = `**Step-by-step:**\nA = ½ × b × h = ½ × ${b} × ${h} = **${correct} cm²**.`;
+    } else {
+      const l = pick([5,8,10,12]);
+      const w = pick([3,4,6,7]);
+      correct = l*w;
+      qText = `Find the area (cm²) of a rectangle with length ${l} cm and width ${w} cm.`;
+      explanation = `**Step-by-step:**\nA = l × w = ${l} × ${w} = **${correct} cm²**.`;
+    }
+    return { qText, correctVal:correct, options:makeIntOptions(correct, Math.max(6, Math.round(correct*0.2))).map(v=>v+' cm²'), explanation };
+  },
+  "00030": ()=>{
+    const type = rnd(1,3);
+    let correct, qText, explanation;
+    if(type===1){
+      const r = pick([3,4,5,7]);
+      const h = pick([5,6,8,10]);
+      correct = Math.round(Math.PI*r*r*h);
+      qText = `Find the volume (cm³) of a cylinder with radius ${r} cm and height ${h} cm (π ≈ 3.14).`;
+      explanation = `**Step-by-step:**\nV = πr²h = 3.14 × ${r}² × ${h} = **${correct} cm³**.`;
+    } else if(type===2){
+      const r = pick([3,4,5,6]);
+      correct = Math.round((4/3)*Math.PI*r*r*r);
+      qText = `Find the volume (cm³) of a sphere with radius ${r} cm (π ≈ 3.14).`;
+      explanation = `**Step-by-step:**\nV = 4/3 πr³ = 4/3 × 3.14 × ${r}³ = **${correct} cm³**.`;
+    } else {
+      const r = pick([3,4,5,6]);
+      const h = pick([6,8,9,12]);
+      correct = Math.round((1/3)*Math.PI*r*r*h);
+      qText = `Find the volume (cm³) of a cone with radius ${r} cm and height ${h} cm (π ≈ 3.14).`;
+      explanation = `**Step-by-step:**\nV = ⅓πr²h = ⅓ × 3.14 × ${r}² × ${h} = **${correct} cm³**.`;
+    }
+    return { qText, correctVal:correct, options:makeIntOptions(correct, Math.max(10, Math.round(correct*0.2))).map(v=>v+' cm³'), explanation };
+  },
 
-    qText = `Two trains of lengths ${len1}m and ${len2}m approach each other at speeds of ${speed1} km/hr and ${speed2} km/hr in opposite directions. Time taken to cross each other?`;
-    options = [exactTime, exactTime + 4, exactTime + 8, exactTime + 14].sort(() => Math.random() - 0.5);
-    correctIdx = options.indexOf(exactTime);
-
-    explanation = `**Step-by-Step Solution:**\n1. Total Distance = ${totalDist}m.\n2. Relative Speed = ${speed1} + ${speed2} = ${relSpeedKmH} km/hr (${relMS} m/s).\n3. Time = ${totalDist} / ${relMS} = ${exactTime}s.`;
-  } else {
-    const ans = Math.floor(Math.random() * 25 + 10);
-    const valB = Math.floor(Math.random() * 10 + 2);
-    const valA = ans + valB;
-
-    qText = `Practice Problem for ${TOPICS[topicId].title}: Compute the resolved metric given parameters X = ${valA} and Y = ${valB}.`;
-    options = [ans, ans + 4, ans + 8, ans + 12].sort(() => Math.random() - 0.5);
-    correctIdx = options.indexOf(ans);
-
-    explanation = `**Step-by-Step Solution:**\n1. Evaluate parameters: ${valA} - ${valB} = ${ans}.`;
+  /* ── NEW TOPICS 00031–00034 ── */
+  "00031": ()=>{
+    // Date Format & Month Finder
+    const sub = rnd(1,3);
+    if(sub === 1){
+      // Give date, ask month name
+      const d = rnd(1,28);
+      const m = rnd(1,12);
+      const y = rnd(1990,2030);
+      const correct = MONTH_NAMES[m-1];
+      const qText = `What month is the date ${String(d).padStart(2,'0')}/${String(m).padStart(2,'0')}/${y}?`;
+      const explanation = `**Step-by-step:**\nThe date is in DD/MM/YYYY format. The month number is ${m}, which is **${correct}**.`;
+      const opts = shuffle([correct, ...shuffle(MONTH_NAMES.filter(x=>x!==correct)).slice(0,3)]);
+      return { qText, correctVal:correct, options:opts, explanation };
+    } else if(sub === 2){
+      // Give month number, ask name
+      const m = rnd(1,12);
+      const correct = MONTH_NAMES[m-1];
+      const qText = `In the standard calendar, which month corresponds to month number ${m}?`;
+      const explanation = `**Step-by-step:**\nMonth ${m} is **${correct}**.`;
+      const opts = shuffle([correct, ...shuffle(MONTH_NAMES.filter(x=>x!==correct)).slice(0,3)]);
+      return { qText, correctVal:correct, options:opts, explanation };
+    } else {
+      // Give month name, ask number
+      const m = rnd(1,12);
+      const correct = String(m);
+      const qText = `What is the numeric month number of ${MONTH_NAMES[m-1]}?`;
+      const explanation = `**Step-by-step:**\n${MONTH_NAMES[m-1]} is month **${m}**.`;
+      const opts = makeIntOptions(m, 3).map(String);
+      return { qText, correctVal:correct, options:opts, explanation };
+    }
+  },
+  "00032": ()=>{
+    // Day of the Week for any given date (Zeller)
+    const d = rnd(1,28);
+    const m = rnd(1,12);
+    const y = rnd(1990,2030);
+    const dow = dayOfWeekZeller(d, m, y); // 0=Sun … 6=Sat
+    const correct = DAY_NAMES[dow];
+    const qText = `What day of the week is ${String(d).padStart(2,'0')}/${String(m).padStart(2,'0')}/${y}?`;
+    const explanation = `**Step-by-step (Zeller's congruence):**\nFor date ${d}/${m}/${y}, using Zeller's formula, the weekday is **${correct}**.`;
+    const opts = shuffle([correct, ...shuffle(DAY_NAMES.filter(x=>x!==correct)).slice(0,3)]);
+    return { qText, correctVal:correct, options:opts, explanation };
+  },
+  "00033": ()=>{
+    // Sundays in a given month/year
+    const m = rnd(1,12);
+    const y = rnd(2000,2030);
+    const weekday = rnd(0,6);
+    const correct = countWeekdayInMonth(weekday, m-1, y);
+    const qText = `How many ${DAY_NAMES[weekday]}s are there in ${MONTH_NAMES[m-1]} ${y}?`;
+    const explanation = `**Step-by-step:**\n1. The 1st of ${MONTH_NAMES[m-1]} ${y} falls on a ${DAY_NAMES[dayOfWeekZeller(1,m,y)]}.\n2. Counting the ${DAY_NAMES[weekday]}s in the month gives **${correct}**.`;
+    const opts = [4,5,6].map(String);
+    // Include correct if not in [4,5,6] — but count is always 4 or 5 (or 0 if not present, which won't happen for full months)
+    if(!opts.includes(String(correct))) opts[0] = String(correct);
+    return { qText, correctVal:String(correct), options:[...new Set(opts)], explanation };
+  },
+  "00034": ()=>{
+    // Sundays (or any weekday) in a given year
+    const y = rnd(2000,2030);
+    const weekday = rnd(0,6);
+    const correct = countWeekdayInYear(weekday, y);
+    const qText = `How many ${DAY_NAMES[weekday]}s are there in the year ${y}?`;
+    const explanation = `**Step-by-step:**\n${y} is a ${isLeapYear(y)?'leap':'normal'} year (${isLeapYear(y)?366:365} days).\nThe 1st of January ${y} falls on a ${DAY_NAMES[dayOfWeekZeller(1,1,y)]}.\nCounting gives **${correct} ${DAY_NAMES[weekday]}s**.`;
+    const opts = [52,53].map(String);
+    if(!opts.includes(String(correct))) opts[0] = String(correct);
+    return { qText, correctVal:String(correct), options:[...new Set(opts)], explanation };
   }
+};
 
-  state.questionStartTime = Date.now();
-  state.currentQDetails = { topicId, sessId, correctIdx, explanation, exactAnswer: options[correctIdx] };
+/* ───────────────────────── QUESTION FLOW ───────────────────────── */
+function triggerQuestionGeneration(topicId, sessId, btnElement){
+  if(btnElement) btnElement.remove();
+  const sess=state.chats[sessId];
+  sess.messages.push({role:'bot',text:`⏳ Loading parameters...`,loadingText:"Generating aptitude sums..."});
+  saveState(); renderMessages();
+  const randSeconds = rnd(2,4);
+  setTimeout(()=>{
+    sess.messages.pop();
+    generateRandomQuestion(topicId, sessId);
+    nextGlobalBtn.style.display='inline-flex';
+  }, randSeconds*1000);
+}
+
+function generateRandomQuestion(topicId, sessId){
+  const sess=state.chats[sessId]; if(!sess) return;
+  const qid='q_'+Date.now();
+  const gen = QGEN[topicId] || QGEN['00001'];
+  let data;
+  try{ data = gen(); }catch(e){ data = QGEN['00001'](); }
+  const { qText, correctVal, options, explanation } = data;
+
+  let finalOptions = [...options].map(String);
+  if(!finalOptions.includes(String(correctVal))){
+    finalOptions[0] = String(correctVal);
+  }
+  finalOptions = [...new Set(finalOptions)];
+  while(finalOptions.length < 4) finalOptions.push(String(Number(correctVal)+finalOptions.length+1));
+  finalOptions = finalOptions.slice(0,4);
+  const correctIdx = finalOptions.findIndex(o=>o===String(correctVal));
+
+  state.questionStartTime=Date.now();
+  state.currentQDetails={ topicId, sessId, correctIdx, explanation, exactAnswer: finalOptions[correctIdx] };
 
   sess.messages.push({
-    role: 'bot',
-    text: `**Practice Question:**`,
-    quizData: { qid, topicId, question: qText, options }
+    role:'bot',
+    text:`**Practice Question:**`,
+    quizData:{ qid, topicId, question:qText, options:finalOptions }
   });
-  saveState();
-  renderMessages();
+  saveState(); renderMessages();
 }
 
-/* HANDLE QUIZ ANSWER */
-function handleQuizAnswer(quizData, selectedIdx, btnElement) {
-  const duration = Number(((Date.now() - state.questionStartTime) / 1000).toFixed(1));
-  const sess = state.chats[quizData.sessId];
+/* ───────────────────────── ANSWER HANDLING ───────────────────────── */
+function handleQuizAnswer(quizData, selectedIdx, btnElement){
+  const duration=Number(((Date.now()-state.questionStartTime)/1000).toFixed(1));
+  const sess=state.chats[quizData.sessId];
+  const parent=btnElement.parentElement;
+  parent.querySelectorAll('.quiz-option-btn').forEach(b=>b.disabled=true);
+  const isCorrect = (selectedIdx===state.currentQDetails.correctIdx);
 
-  const parent = btnElement.parentElement;
-  parent.querySelectorAll('.quiz-option-btn').forEach(b => b.disabled = true);
+  recordAnswer(quizData.topicId, isCorrect);
 
-  const isCorrect = (selectedIdx === state.currentQDetails.correctIdx);
+  state.lastTelemetry={ id:Date.now(), topicId:quizData.topicId, correct:isCorrect, duration, explanation:state.currentQDetails.explanation };
+  saveState(); renderAnalysisTable();
 
-  state.lastTelemetry = {
-    id: Date.now(),
-    topicId: quizData.topicId,
-    correct: isCorrect,
-    duration: duration,
-    explanation: state.currentQDetails.explanation
-  };
-  saveState();
-  renderAnalysisTable();
-
-  if (isCorrect) {
+  if(isCorrect){
     btnElement.classList.add('correct');
-
-    if (duration < 10) {
+    if(duration<10){
       sess.messages.push({
-        role: 'bot',
-        text: `✅ Correct answer in ${duration}s.`,
-        cheatNotice: { msg: "I know that you're using an AI to answer. Are you using an AI?", sessId: quizData.sessId }
+        role:'bot',
+        text:`✅ Correct answer in ${duration}s.`,
+        cheatNotice:{ msg:"I know that you're using an AI to answer. Are you using an AI?", sessId:quizData.sessId }
       });
-      saveState(); renderMessages();
-      return;
-    } else {
-      const praises = [
-        `🎉 Fantastic work, ${state.username}! Solved brilliantly in ${duration}s.`,
-        `🏆 Outstanding! Executed cleanly in ${duration} seconds.`,
-        `⭐ Spot on! Calculation speed is top-notch (${duration}s).`
-      ];
-      const praise = praises[Math.floor(Math.random() * praises.length)];
-      
-      sess.messages.push({
-        role: 'bot',
-        text: `${praise}`
-      });
-      saveState(); renderMessages();
+      saveState(); renderMessages(); return;
     }
+    const praises=[
+      `🎉 Fantastic work, ${state.username}! Solved brilliantly in ${duration}s.`,
+      `🏆 Outstanding! Executed cleanly in ${duration} seconds.`,
+      `⭐ Spot on! Calculation speed is top-notch (${duration}s).`,
+      `💪 Great job! Your accuracy is improving.`,
+      `🚀 Excellent! Keep up the momentum.`
+    ];
+    sess.messages.push({ role:'bot', text: praises[Math.floor(Math.random()*praises.length)] });
+    saveState(); renderMessages();
   } else {
     btnElement.classList.add('wrong');
     parent.children[state.currentQDetails.correctIdx].classList.add('correct');
     sess.messages.push({
-      role: 'bot',
-      text: `❌ Incorrect. Here are the step-by-step calculations:\n\n${state.currentQDetails.explanation}`
+      role:'bot',
+      text:`❌ Incorrect. Here are the step-by-step calculations:\n\n${state.currentQDetails.explanation}`
     });
     saveState(); renderMessages();
   }
+  if(state.showProfile) renderProfileView();
 }
 
-/* BOTTOM FIXED NEXT BUTTON */
-nextGlobalBtn.onclick = () => {
-  const sess = getActiveSession();
-  if (sess) {
-    state.lastTelemetry = null; // Hide telemetry when next question is loaded
-    renderAnalysisTable();
+nextGlobalBtn.onclick=()=>{
+  const sess=getActiveSession();
+  if(sess){
+    state.lastTelemetry=null; renderAnalysisTable();
     triggerQuestionGeneration(sess.topicId, sess.id, null);
   }
 };
 
-window.handleCheatResponse = function(sessId, isYes) {
-  const sess = state.chats[sessId];
-  if (!sess) return;
-
-  if (isYes) {
-    const responses = [
+window.handleCheatResponse=function(sessId, isYes){
+  const sess=state.chats[sessId]; if(!sess) return;
+  if(isYes){
+    const responses=[
       "I identified correctly! Nice try using an automated assistant.",
       "Caught you! My telemetry caught your sub-10 second execution.",
       "Aha! AI assistance detected. You can't fool this trainer.",
       "I knew it! That response speed was purely artificial.",
       "Gotcha! Automated calculation fingerprint verified."
     ];
-    const resp = responses[Math.floor(Math.random() * responses.length)];
-    sess.messages.push({ role: 'bot', text: `🤖 **System Notice:** ${resp}` });
+    sess.messages.push({ role:'bot', text:`🤖 **System Notice:** ${responses[Math.floor(Math.random()*responses.length)]}` });
   } else {
-    sess.messages.push({ role: 'bot', text: `👍 Okay, continue your pure mental math training!` });
+    sess.messages.push({ role:'bot', text:`👍 Okay, continue your pure mental math training!` });
   }
   saveState(); renderMessages();
 };
 
-/* 5-BOX MANUAL CODE ENTRY LOGIC */
-const codeBoxes = [$('cb1'), $('cb2'), $('cb3'), $('cb4'), $('cb5')];
-codeBoxes.forEach((box, idx) => {
-  box.oninput = (e) => {
-    const val = e.target.value.replace(/[^0-9]/g, '');
-    e.target.value = val;
-    if (val && idx < 4) {
-      codeBoxes[idx + 1].focus();
-    }
-    if (codeBoxes.every(b => b.value.length === 1)) {
-      $('codeSubmitBtn').click();
-    }
+/* ───────────────────────── CODE ENTRY ───────────────────────── */
+const codeBoxes=[$('cb1'),$('cb2'),$('cb3'),$('cb4'),$('cb5')];
+codeBoxes.forEach((box,idx)=>{
+  box.oninput=(e)=>{
+    const val=e.target.value.replace(/[^0-9]/g,'');
+    e.target.value=val;
+    if(val && idx<4) codeBoxes[idx+1].focus();
+    if(codeBoxes.every(b=>b.value.length===1)) $('codeSubmitBtn').click();
   };
-  box.onkeydown = (e) => {
-    if (e.key === 'Backspace' && !box.value && idx > 0) {
-      codeBoxes[idx - 1].focus();
-    } else if (e.key === 'Enter') {
-      $('codeSubmitBtn').click();
-    }
+  box.onkeydown=(e)=>{
+    if(e.key==='Backspace' && !box.value && idx>0) codeBoxes[idx-1].focus();
+    else if(e.key==='Enter') $('codeSubmitBtn').click();
   };
 });
-
-$('codeSubmitBtn').onclick = () => {
-  const code = codeBoxes.map(b => b.value).join('');
-  if (code.length < 5) {
-    alert("Please enter all 5 digits of the topic code (e.g., 00001).");
-    return;
-  }
-  if (TOPICS[code]) {
-    const newSess = createSession(code);
-    state.activeId = newSess.id;
-    state.lastTelemetry = null;
-    renderAnalysisTable();
-    codeBoxes.forEach(b => b.value = '');
-    saveState();
-    renderAll();
+$('codeSubmitBtn').onclick=()=>{
+  const code=codeBoxes.map(b=>b.value).join('');
+  if(code.length<5){ alert("Please enter all 5 digits of the topic code (e.g., 00001)."); return; }
+  if(TOPICS[code]){
+    state.showProfile=false; profileView.style.display='none'; messagesEl.style.display='flex';
+    const newSess=createSession(code);
+    state.activeId=newSess.id; state.lastTelemetry=null;
+    renderAnalysisTable(); codeBoxes.forEach(b=>b.value='');
+    saveState(); renderAll();
   } else {
-    alert(`Code "${code}" not found. Valid codes range from 00001 to 00030.`);
+    alert(`Code "${code}" not found. Valid codes range from 00001 to 00034.`);
   }
 };
 
-/* FLOW CONTROL & GREETING */
-function initApp() {
+/* ───────────────────────── FLOW / LISTENERS ───────────────────────── */
+function initApp(){
   loadState();
-  if (!state.username) {
-    onboardingOverlay.style.display = 'flex';
-  } else {
-    onboardingOverlay.style.display = 'none';
-    triggerGreetingAnimation(state.username);
-  }
+  if(!state.username) onboardingOverlay.style.display='flex';
+  else { onboardingOverlay.style.display='none'; triggerGreetingAnimation(state.username); }
 }
-
-onboardingForm.onsubmit = (e) => {
+onboardingForm.onsubmit=(e)=>{
   e.preventDefault();
-  const name = usernameInput.value.trim();
-  if (!name) return;
-  state.username = name;
+  const name=usernameInput.value.trim(); if(!name) return;
+  state.username=name; state.usernameFirstSet=false; state.usernameLastChanged=0;
   saveState();
-
   onboardingOverlay.classList.add('fade-out');
-  setTimeout(() => {
-    onboardingOverlay.style.display = 'none';
-    triggerGreetingAnimation(state.username);
-  }, 600);
+  setTimeout(()=>{ onboardingOverlay.style.display='none'; triggerGreetingAnimation(state.username); },600);
 };
-
-function triggerGreetingAnimation(name) {
-  greetMessageText.textContent = `Hello, ${name}!`;
+function triggerGreetingAnimation(name){
+  greetMessageText.textContent=`Hello, ${name}!`;
   greetOverlay.classList.add('active');
-
-  setTimeout(() => {
+  setTimeout(()=>{
     greetOverlay.classList.remove('active');
-    setTimeout(() => {
-      startMainApp();
-    }, 600);
-  }, 1600);
+    setTimeout(()=>{ startMainApp(); },600);
+  },1600);
 }
-
-function startMainApp() {
-  if (Object.keys(state.chats).length === 0) {
-    createSession('00001');
-  } else if (!state.activeId) {
-    state.activeId = Object.keys(state.chats)[0];
-  }
+function startMainApp(){
+  if(Object.keys(state.chats).length===0) createSession('00001');
+  else if(!state.activeId) state.activeId=Object.keys(state.chats)[0];
   renderAll();
+  renderUsernameLockBox();
 }
-
-$('dirModalOpenBtn').onclick = () => {
-  renderDirectory();
-  directoryOverlay.classList.add('open');
-};
-$('directoryCloseBtn').onclick = () => {
-  directoryOverlay.classList.remove('open');
-};
-
-document.querySelectorAll('.color-btn').forEach(b => {
-  b.onclick = () => applyAccent(b.dataset.accent);
-});
-
-$('lightBtn').onclick = () => { state.bgType = 'light'; state.bgCustomUrl = ''; applyBackground(); saveState(); };
-$('darkBtn').onclick = () => { state.bgType = 'dark'; state.bgCustomUrl = ''; applyBackground(); saveState(); };
-
-menuToggle.onclick = () => sidebar.classList.toggle('collapsed');
-settingsBtn.onclick = () => settingsOverlay.classList.add('open');
-$('settingsClose').onclick = () => settingsOverlay.classList.remove('open');
-
-$('clearAllBtn').onclick = () => {
-  if(confirm('Reset all progress?')) {
-    state.chats = {};
-    state.activeId = null;
-    state.lastTelemetry = null;
-    saveState();
-    createSession('00001');
-    renderAll();
+$('dirModalOpenBtn').onclick=()=>{ renderDirectory(); directoryOverlay.classList.add('open'); };
+$('directoryCloseBtn').onclick=()=>{ directoryOverlay.classList.remove('open'); };
+document.querySelectorAll('.color-btn').forEach(b=>{ b.onclick=()=>applyAccent(b.dataset.accent); });
+$('lightBtn').onclick=()=>{ state.bgType='light'; state.bgCustomUrl=''; applyBackground(); saveState(); };
+$('darkBtn').onclick=()=>{ state.bgType='dark'; state.bgCustomUrl=''; applyBackground(); saveState(); };
+$('menuToggle').onclick=()=>sidebar.classList.toggle('collapsed');
+$('settingsBtn').onclick=()=>{ settingsOverlay.classList.add('open'); renderUsernameLockBox(); };
+$('settingsClose').onclick=()=>settingsOverlay.classList.remove('open');
+$('clearAllBtn').onclick=()=>{
+  if(confirm('Reset all progress? This will delete all sessions and profile stats.')){
+    state.chats={}; state.activeId=null; state.lastTelemetry=null; state.profile={};
+    saveState(); createSession('00001'); renderAll();
   }
 };
-
-if (window.innerWidth <= 720) sidebar.classList.add('collapsed');
-
+profileBtn.onclick=()=>{ toggleProfile(); if(state.showProfile) renderProfileView(); };
+if(window.innerWidth<=720) sidebar.classList.add('collapsed');
 initApp();
 </script>
 </body>
